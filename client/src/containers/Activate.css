@@ -1,0 +1,10 @@
+@media all and (min-width: 480px) {
+    .activate {
+      padding: 60px 0;
+    }
+  
+    .activate form {
+      margin: 0 auto;
+      max-width: 320px;
+    }
+  }

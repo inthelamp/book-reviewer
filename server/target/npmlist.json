@@ -1,0 +1,1 @@
+{"version":"0.1.0","name":"book-reviewer-server","dependencies":{"cors":{"version":"2.8.5"},"dotenv":{"version":"10.0.0"},"express":{"version":"4.17.1"},"mongodb":{"version":"4.1.2"},"nodemon":{"version":"2.0.12"}}}
