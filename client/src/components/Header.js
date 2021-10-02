@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Form, FormControl, Button, Nav, Navbar, NavDropdown} from 'react-bootstrap'
 import PropTypes from 'prop-types'
-import UserStatuses from '../store/UserStatuses'
 import './Header.css'
 
 
@@ -13,7 +12,7 @@ const Header = ({ title }) => {
     const getUserName = () => {
         let name = ''        
 
-        if (User && User.status === UserStatuses.SIGNED_IN) {            
+        if (User && User.isSignedIn) {            
             const role = User.role        
             name = User.name
     
@@ -36,7 +35,15 @@ const Header = ({ title }) => {
                 : 
                 (
                     <NavDropdown title={userName} id='user-nav-dropdown'>
-                        <NavDropdown.Item href='/signout'>Sign Out</NavDropdown.Item>
+                        <NavDropdown.Item 
+                            as={Link}
+                            to={{
+                                pathname:'/signout',
+                                state: { User }
+                            }}
+                        >
+                            Sign Out
+                        </NavDropdown.Item>
                     </NavDropdown>
                 )
         )

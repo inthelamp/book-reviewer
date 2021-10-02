@@ -54,7 +54,7 @@ const Activate = ( props ) => {
                     onChange={(e) => setCode(e.currentTarget.value)}
                 />
                 </Form.Group> 
-                <Button block size='lg' type='submit' disabled={!isValid()} >
+                <Button size='lg' type='submit' disabled={!isValid()} >
                     Activate
                 </Button>                
                 <Message message={message} messageStyle={messageStyle}/>

@@ -14,6 +14,7 @@ const Signin = () => {
   const [message, setMessage] = useState('')
   const [messageStyle, setMessageStyle] = useState('')
   const [isSignedIn, setIsSignedIn] = useState(false)
+
   const dispatch = useDispatch()
 
   const addHours = ( date, hours ) => {
@@ -27,16 +28,14 @@ const Signin = () => {
     document.cookie = cookieName + '=' + value + '; SameSite=strict; Secure;' + expires + '; path=/'
   }
 
-  const setUser = (token) => {
+  const saveUser = (token) => {
     if (token) {      
       try {
           const decoded = jwt_decode(token)
-          const {id, name, role} = decoded
-          dispatch(SignedIn(id, name, role, token))
+          dispatch(SignedIn(decoded.name, decoded.role))
       } catch (error) {
           console.log(error)
       }
-
     } 
   }
 
@@ -47,7 +46,7 @@ const Signin = () => {
     .post(process.env.REACT_APP_SERVER_BASE_URL + '/users/signin', {email, password})
     .then((response) => {
         setCookie('token', response.data.accessToken)
-        setUser(response.data.accessToken)
+        saveUser(response.data.accessToken)
         setIsSignedIn(true)
     })
     .catch ((error) => {
@@ -88,7 +87,7 @@ const Signin = () => {
             onChange={(e) => setPassword(e.currentTarget.value)}
           />
         </Form.Group>
-        <Button block size='lg' type='submit' disabled={!isValid()} >
+        <Button size='lg' type='submit' disabled={!isValid()} > 
           Sign In
         </Button>
         <Message message={message} messageStyle={messageStyle}/>

@@ -1,18 +1,13 @@
 import ActionTypes from './ActionTypes'
 
-export const SignedIn = (id, name, role, token) => ({
+export const SignedIn = (name, role) => ({
     type: ActionTypes.SIGNED_IN,
     payload: {
-        id,
         name, 
-        role,
-        token
+        role
     }
 })
 
-export const SignedOut = (id) => ({
-    type: ActionTypes.SIGNED_OUT,
-    payload: {
-        id
-    }
+export const SignedOut = () => ({
+    type: ActionTypes.SIGNED_OUT
 })

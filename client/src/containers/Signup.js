@@ -108,7 +108,7 @@ const Signup = () => {
           onChange={onChangeConfirmPassword}
         />          
       </Form.Group>
-      <Button block size='lg' type='submit' disabled={!isValid()} >
+      <Button size='lg' type='submit' disabled={!isValid()} >
         Sign Up
       </Button>
       <Message message={message} messageStyle={messageStyle}/>

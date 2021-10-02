@@ -2,8 +2,6 @@ import { Form } from 'react-bootstrap'
 import './Message.css'
 
 const Message = ({ message, messageStyle }) => {
-    console.log('message', message)
-
     return (
           message === '' ?  '' :
                     <>
