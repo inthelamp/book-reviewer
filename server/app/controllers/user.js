@@ -259,7 +259,7 @@ exports.ForgotPassword = async (req, res) => {
     if (!token || !newPassword || !confirmPassword) {
       return res.status(403).json({
         error: true,
-        message: "Some information is missed.",
+        message: "Some information is missing.",
       });
     }
 

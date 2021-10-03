@@ -1,49 +1,31 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
-import { SignedOut } from '../store/Actions'
+import { SignedOut } from '../features/Actions'
+import { getToken } from '../features/PersistentUser'
 
-const Signout = ( props ) => {    
-    const [isSignedOut, setIsSignedOut] = useState(false)
-    // const User =  (props.location && props.location.state.User) || ''
-    const cookieName = 'token'
-
-    const getCookie = (cookieName) => {
-        const name = cookieName + '='
-        const decodedCookie = decodeURIComponent(document.cookie)
-        const cookieAttributes = decodedCookie.split(';')
-
-        for(let i = 0; i <cookieAttributes.length; i++) {
-            let ca = cookieAttributes[i]
-            while (ca.charAt(0) === ' ') {
-                ca = ca.substring(1)
-            }
-            if (ca.indexOf(name) === 0) {
-                return ca.substring(name.length, ca.length)
-            }
-        }
-        return ''
-    }
-
-    const token = useMemo(() => getCookie(cookieName), [cookieName])
+const Signout = () => {    
+    const token = getToken()
     
+    //Delete cookies
     const clearCookies= () => {
-       const yesterday = new Date(new Date().setDate(new Date().getDate()-1));
-       document.cookie = 'token=; expires=' + yesterday.toUTCString  
+       document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
     }
 
     const dispatch = useDispatch()
 
     useEffect(() => {  
-        if (!isSignedOut && token) {                 
+        let isMounted = true       
+
+        if (isMounted && token) {                 
             const AuthString = 'token '.concat(token)
 
             axios
             .get(process.env.REACT_APP_SERVER_BASE_URL + '/users/signout', { headers: { Authorization: AuthString } })
             .then((response) => {          
-                clearCookies()     
-                setIsSignedOut(true)                                            
+                clearCookies()         
+                dispatch(SignedOut())            //change status of user to sign-out                                   
             })
             .catch ((error) => {   
                 if (error.response) {
@@ -53,21 +35,11 @@ const Signout = ( props ) => {
                     console.log('Error', error.message)
                 }
             })   
-        }
-    }, [isSignedOut, token]); 
+        } 
+        return () => { isMounted = false };  //clean up
+    }, [token, dispatch]); 
 
-    useEffect(() => {  
-        if (isSignedOut) {                 
-            try {
-                dispatch(SignedOut()) 
-                return <Redirect to='/' />
-            } catch (error) {
-                console.log(error)
-            }
-        }
-    }, [isSignedOut, dispatch]); 
-
-    return <></>
+    return  <Redirect to='/' />
 }
 
 export default Signout

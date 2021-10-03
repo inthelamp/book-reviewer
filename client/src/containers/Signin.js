@@ -5,7 +5,7 @@ import { NavLink, Redirect } from 'react-router-dom'
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 import Message from '../components/Message'
-import { SignedIn } from '../store/Actions'
+import { SignedIn } from '../features/Actions'
 import './Signin.css'
 
 const Signin = () => {

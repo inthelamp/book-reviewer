@@ -1,54 +1,59 @@
+import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Form, FormControl, Button, Nav, Navbar, NavDropdown} from 'react-bootstrap'
 import PropTypes from 'prop-types'
+import { persistentUser } from '../features/PersistentUser'
 import './Header.css'
 
 
 const Header = ({ title }) => {
-    const User = useSelector((state) => state)
- 
-    const getUserName = () => {
-        let name = ''        
+    const storeUser = useSelector((state) => state)
+    const User = Object.keys(storeUser).length === 0 ? persistentUser() : storeUser
 
-        if (User && User.isSignedIn) {            
-            const role = User.role        
-            name = User.name
+    const getUserName = (user) => {
+        let name = '' 
+
+        if (user && user.isSignedIn) {            
+            const role = user.role        
+            name = user.name
     
             if (role === 'Admin') {
                 name = name + ' (' + role + ')'
             }
         }
 
-        return name
+        return name        
     }    
 
-    const userTab = () => {
-        const userName = getUserName()
+    // attach Sign Out tab to user name if user name is available
+    const userName = useMemo(() => getUserName(User), [User])
 
-        return (
-            userName === '' ? 
-                (
+    const userTab = userName === '' ? 
+                (        
                     <Nav.Link href='/signin'>Sign In</Nav.Link>
-                ) 
+                )
                 : 
                 (
                     <NavDropdown title={userName} id='user-nav-dropdown'>
-                        <NavDropdown.Item 
-                            as={Link}
-                            to={{
-                                pathname:'/signout',
-                                state: { User }
-                            }}
-                        >
+                        <NavDropdown.Item href='/signout'>
                             Sign Out
                         </NavDropdown.Item>
                     </NavDropdown>
-                )
-        )
-    }
+                )     
 
+    // sign out when token is expired            
+    const history = useHistory()            
+
+    const signOut = () => {
+        history.push('/signout')
+    }            
+
+    if (User && User.isTokenExpried) {
+        signOut()
+    } 
+                                  
     return (
         <Navbar bg='white' expand='lg'>            
             <Navbar.Brand 
@@ -92,7 +97,7 @@ const Header = ({ title }) => {
                 </Form>                  
             </Nav>          
             <Nav className='pull-right user-tab'>
-                { userTab() }
+                { userTab }
             </Nav>                 
             </Navbar.Collapse>
         </Navbar>        
