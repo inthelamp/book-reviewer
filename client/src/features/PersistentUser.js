@@ -17,7 +17,7 @@ export const getToken = () => {
     return ''
 }
 
-export const isTokenExpried = () => {
+export const getTokenNotExpried = () => {
     const token = getToken()
 
     if (token) {      
@@ -26,14 +26,14 @@ export const isTokenExpried = () => {
             const { exp } = decoded
 
             if (Date.now() < exp * 1000) { 
-                return false
+                return token
             } 
         } catch (error) {
             console.log(error)
         }
     }   
 
-    return true
+    return ''
 }
 
 export const persistentUser = () => {
@@ -52,7 +52,7 @@ export const persistentUser = () => {
                 }
             } else {
                 return {
-                    "isTokenExpried": true
+                    "isTokenExpired": true
                 }
             }
         } catch (error) {

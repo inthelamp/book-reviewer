@@ -8,7 +8,8 @@ import { persistentUser } from '../features/PersistentUser'
 import './Header.css'
 
 
-const Header = ({ title }) => {
+const Header = ( props ) => {
+    const title = process.env.REACT_APP_TITLE
     const storeUser = useSelector((state) => state)
     const User = Object.keys(storeUser).length === 0 ? persistentUser() : storeUser
 
@@ -50,7 +51,7 @@ const Header = ({ title }) => {
         history.push('/signout')
     }            
 
-    if (User && User.isTokenExpried) {
+    if (User && User.isTokenExpired) {
         signOut()
     } 
                                   

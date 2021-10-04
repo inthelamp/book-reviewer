@@ -15,7 +15,7 @@ function App() {
   return (    
     <Router>                  
       <div className='container'>           
-        <Header title='Book Reviewer' component={Header} />           
+        <Header component={ Header } />           
         <Switch>
           <Route path='/' exact component={ Home } />              
           <Route path='/browse' component={ BrowseReview } />       
@@ -26,9 +26,7 @@ function App() {
           <Route path='/signup'>
             <Signup />
           </Route>         
-          <Route path='/signout'>
-            <Signout />
-          </Route>            
+          <Route path='/signout' component={ Signout } />          
           <Route path='/activate' component={ Activate } />   
           <Route path='/about' component={ About } />
         </Switch>

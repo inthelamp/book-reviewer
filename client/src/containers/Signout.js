@@ -3,11 +3,11 @@ import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
 import { SignedOut } from '../features/Actions'
-import { getToken } from '../features/PersistentUser'
+import { getTokenNotExpried } from '../features/PersistentUser'
 
-const Signout = () => {    
-    const token = getToken()
-    
+const Signout = ( props ) => {    
+    const token = getTokenNotExpried()
+
     //Delete cookies
     const clearCookies= () => {
        document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
@@ -18,23 +18,28 @@ const Signout = () => {
     useEffect(() => {  
         let isMounted = true       
 
-        if (isMounted && token) {                 
-            const AuthString = 'token '.concat(token)
+        if (isMounted) {      
+            if (token) {
+                const AuthString = 'token '.concat(token)
 
-            axios
-            .get(process.env.REACT_APP_SERVER_BASE_URL + '/users/signout', { headers: { Authorization: AuthString } })
-            .then((response) => {          
+                axios
+                .get(process.env.REACT_APP_SERVER_BASE_URL + '/users/signout', { headers: { Authorization: AuthString } })
+                .then((response) => {          
+                    clearCookies()         
+                    dispatch(SignedOut())            //change status of user to sign-out                                   
+                })
+                .catch ((error) => {   
+                    if (error.response) {
+                        console.log(error.response.data.message)         
+                        clearCookies()             
+                    } else {
+                        console.log('Error', error.message)
+                    }
+                })   
+            } else {
                 clearCookies()         
-                dispatch(SignedOut())            //change status of user to sign-out                                   
-            })
-            .catch ((error) => {   
-                if (error.response) {
-                    console.log(error.response.data.message)         
-                    clearCookies()             
-                } else {
-                    console.log('Error', error.message)
-                }
-            })   
+                dispatch(SignedOut())            //change status of user to sign-out  
+            }         
         } 
         return () => { isMounted = false };  //clean up
     }, [token, dispatch]); 
