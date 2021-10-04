@@ -4,8 +4,10 @@ const cors = require("cors");
 
 require("dotenv").config();
 
+// set server TCP port
 const port = process.env.SERVER_PORT;
 
+// set db connection
 mongoose.connect(process.env.CONNECTION_STRING, {
     useNewUrlParser: true,
     useUnifiedTopology: true,

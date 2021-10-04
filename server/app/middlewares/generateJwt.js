@@ -6,7 +6,7 @@ const options = {
   expiresIn: process.env.TOKEN_EXPIRE_IN,
 };
 
-async function generateJwt(userId, userName, role) {
+exports.generateJwt = async (userId, userName, role) => {
   try {
     const payload = { 
                       id: userId,
@@ -21,5 +21,3 @@ async function generateJwt(userId, userName, role) {
     return { error: true };
   }
 }
-
-module.exports = { generateJwt };

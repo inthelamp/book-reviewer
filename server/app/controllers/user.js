@@ -7,7 +7,7 @@ const User  = require("../models/user");
 
 //Validate user schema
 const userSchema = Joi.object().keys({
-  email: Joi.string().email({ minDomainSegments: 2 }),
+  email: Joi.string().email({ minDomainSegments: 2 }).required(),
   userName: Joi.string().required().min(3),
   password: Joi.string().required().min(8),
   confirmPassword: Joi.string().valid(Joi.ref("password")).required(),

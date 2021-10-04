@@ -4,7 +4,7 @@ require("dotenv").config();
 
 const User = require("../models/user");
 
-async function verifyJwt(req, res, next) {
+exports.verifyJwt = async (req, res, next) => {
   const authorizationHeader = req.headers.authorization;
 
   let result;
@@ -65,4 +65,3 @@ async function verifyJwt(req, res, next) {
     return res.status(403).json(result);
   }
 }
-module.exports = { verifyJwt };

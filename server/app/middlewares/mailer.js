@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const nodemailer = require("nodemailer");
 
-module.exports.sendEmail = async (email, code) => {
+exports.sendEmail = async (email, code) => {
   try {
     const smtpEndpoint = process.env.SMTP_SERVER;
     const port = process.env.SMTP_PORT;
