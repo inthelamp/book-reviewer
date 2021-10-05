@@ -31,10 +31,11 @@ app.get("/ping", (req, res) => {
   });
 });
 
-var morgan = require('morgan')
-app.use(morgan('combined'))
+var morgan = require('morgan');
+app.use(morgan('combined'));
 
 app.use("/users", require("./app/routes/users"));
+app.use("/reviews", require("./app/routes/reviews"));
 
 app.listen(port, () => {
   console.log("Server started listening on PORT : " + port);

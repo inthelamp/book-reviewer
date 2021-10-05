@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useMemo, useState, useEffect } from 'react'
 import isHotkey from 'is-hotkey'
 import { Editable, withReact, useSlate, Slate } from 'slate-react'
 import {
@@ -32,9 +32,9 @@ const HOTKEYS = {
 
 const LIST_TYPES = ['numbered-list', 'bulleted-list']
 
-const RichText = () => {
+const RichText = ({ setContent, reset }) => {
   const [value, setValue] = useState(
-    JSON.parse(localStorage.getItem('content')) || initialValue
+      JSON.parse(localStorage.getItem('content')) || InitialValue
   )
   const renderElement = useCallback(props => <Element {...props} />, [])
   const renderLeaf = useCallback(props => <Leaf {...props} />, [])
@@ -47,8 +47,16 @@ const RichText = () => {
     if (isChanged) {
       const content = JSON.stringify(value)
       localStorage.setItem('content', content)
+      setContent(content)
     }
   }
+
+  useEffect(() => {
+    if (reset) {
+      localStorage.removeItem('content')
+      setValue(InitialValue)
+    }
+  }, [reset])
 
   return (
     <div className='editor'>
@@ -206,7 +214,7 @@ const MarkButton = ({ format, icon }) => {
   )
 }
 
-const initialValue = [
+export const InitialValue = [
   {
     type: 'paragraph',
     children: [{ text: '' }],

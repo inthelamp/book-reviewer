@@ -63,8 +63,8 @@ module.exports.Signup = async (req, res) => {
     result.value.status = User.Statuses.INACTIVE;
     result.value.role = User.Roles.USER;
     
-    const newuser = new User.Model(result.value);
-    await newuser.save();
+    const newUser = new User.Model(result.value);
+    await newUser.save();
 
     return res.status(200).json({
       success: true,

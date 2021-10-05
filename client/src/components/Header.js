@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Form, FormControl, Button, Nav, Navbar, NavDropdown } from 'react-bootstrap'
-import PropTypes from 'prop-types'
 import { persistentUser } from '../features/PersistentUser'
 import './Header.css'
 import logo from '../assets/images/logo.png'
@@ -107,14 +106,6 @@ const Header = ( props ) => {
             </Navbar>        
         </header>    
     )
-}
-
-Header.defaultProps = {
-    title: 'Book Reviewer',
-}
-
-Header.propTypes = {
-    title: PropTypes.string.isRequired,
 }
 
 export default Header
