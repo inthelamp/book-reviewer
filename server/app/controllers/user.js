@@ -13,7 +13,7 @@ const userSchema = Joi.object().keys({
   confirmPassword: Joi.string().valid(Joi.ref("password")).required(),
 });
 
-exports.Signup = async (req, res) => {
+module.exports.Signup = async (req, res) => {
   try {
     const result = userSchema.validate(req.body);
 
@@ -80,7 +80,7 @@ exports.Signup = async (req, res) => {
   }
 };
 
-exports.Signin = async (req, res) => {
+module.exports.Signin = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -146,7 +146,7 @@ exports.Signin = async (req, res) => {
   }
 };
 
-exports.Activate = async (req, res) => {
+module.exports.Activate = async (req, res) => {
   try {
     const { email, code } = req.body;
 
@@ -198,7 +198,7 @@ exports.Activate = async (req, res) => {
   }
 };
 
-exports.ForgotPassword = async (req, res) => {
+module.exports.ForgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
 
@@ -252,7 +252,7 @@ exports.ForgotPassword = async (req, res) => {
  };
 
 
- exports.ResetPassword = async (req, res) => {
+ module.exports.ResetPassword = async (req, res) => {
   try {
     const { token, newPassword, confirmPassword } = req.body;
 
@@ -304,7 +304,7 @@ exports.ForgotPassword = async (req, res) => {
   }
 };
 
-exports.Signout = async (req, res) => {
+module.exports.Signout = async (req, res) => {
   try {
     const { id } = req.decoded;
 

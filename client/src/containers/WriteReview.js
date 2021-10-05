@@ -1,22 +1,10 @@
-import { Alert } from 'react-bootstrap'
-
+import RichText from '../components/RichText'
 
 const WriteReview = ( props ) => {
-    const User =  (props.location && props.location.state.User) || ''
-    const getUserName = () => {
-        console.log('User', User)
-
-        if (User) {
-            return User.name
-        }
-
-        return ''
-    }
-
     return (
-        <Alert variant='info'>
-            {getUserName()}
-        </Alert>    
+        <RichText>
+            
+        </RichText>
     )
 }
 

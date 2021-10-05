@@ -1,0 +1,27 @@
+.editor {
+    width: 50vmax;
+    font-family: "Times New Roman", sans-serif;
+    margin: auto;
+    border-collapse: separate;
+    border-radius: 0.5em;
+    border-style: solid;
+    border-color:cadetblue;
+    padding: 2vmin 3vmin;
+    margin-top: 2vmin;
+}
+
+blockquote {
+    border-left: 2px solid #ddd;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 10px;
+    color: #aaa;
+    font-style: italic;
+}
+  
+blockquote[dir='rtl'] {
+    border-left: none;
+    padding-left: 0;
+    padding-right: 10px;
+    border-right: 2px solid #ddd;
+}

@@ -9,27 +9,30 @@ import Signout  from './containers/Signout'
 import Signup from './containers/Signup'
 import Activate from './containers/Activate'
 import About from './containers/About'
+import './App.css'
 
 function App() {
 
   return (    
     <Router>                  
       <div className='container'>           
-        <Header component={ Header } />           
-        <Switch>
-          <Route path='/' exact component={ Home } />              
-          <Route path='/browse' component={ BrowseReview } />       
-          <Route path='/write' component={ WriteReview } />          
-          <Route path='/signin'>
-            <Signin />
-          </Route>      
-          <Route path='/signup'>
-            <Signup />
-          </Route>         
-          <Route path='/signout' component={ Signout } />          
-          <Route path='/activate' component={ Activate } />   
-          <Route path='/about' component={ About } />
-        </Switch>
+        <Header component={ Header } />      
+        <body>     
+          <Switch>
+            <Route path='/' exact component={ Home } />              
+            <Route path='/browse' component={ BrowseReview } />       
+            <Route path='/write' component={ WriteReview } />          
+            <Route path='/signin'>
+              <Signin />
+            </Route>      
+            <Route path='/signup'>
+              <Signup />
+            </Route>         
+            <Route path='/signout' component={ Signout } />          
+            <Route path='/activate' component={ Activate } />   
+            <Route path='/about' component={ About } />
+          </Switch>
+        </body>
         <Footer />    
       </div>  
     </Router>     

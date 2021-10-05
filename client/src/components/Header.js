@@ -2,10 +2,11 @@ import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {Form, FormControl, Button, Nav, Navbar, NavDropdown} from 'react-bootstrap'
+import { Form, FormControl, Button, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import { persistentUser } from '../features/PersistentUser'
 import './Header.css'
+import logo from '../assets/images/logo.png'
 
 
 const Header = ( props ) => {
@@ -56,52 +57,55 @@ const Header = ( props ) => {
     } 
                                   
     return (
-        <Navbar bg='white' expand='lg'>            
-            <Navbar.Brand 
-                    as={Link}  
-                    to={{
-                        pathname: '/',
-                        state: { User }
-                    }}
-            >
-                { title }
-            </Navbar.Brand>
-            <Navbar.Toggle aria-controls='basic-navbar-nav' />
-            <Navbar.Collapse id='basic-navbar-nav'>
-            <Nav className='me-auto'>
-                <Nav.Link
-                    as={Link} 
-                    to={{
-                        pathname: '/browse',
-                        state: { User }
-                    }}                
+        <header>
+            <Navbar bg='white' expand='lg'>      
+                <img className='App-logo' src={logo} alt='Logo' />      
+                <Navbar.Brand 
+                        as={Link}  
+                        to={{
+                            pathname: '/',
+                            state: { User }
+                        }}
                 >
-                    Read Reviews
-                </Nav.Link>
-                <Nav.Link 
-                    as={Link} 
-                    to={{
-                        pathname: '/write',
-                        state: { User }
-                    }}
-                >
-                    Write Review
-                </Nav.Link>
-                <Form className='d-flex'>
-                    <FormControl
-                        type='search'
-                        placeholder='Search'
-                        className='mt-0 mb-0 mr-02'
-                        aria-label='Search'
-                    />
-                    <Button variant='success' size='sm'>Search</Button>
-                </Form>                  
-            </Nav>          
-            <Nav className='pull-right user-tab'>
-                { userTab }
-            </Nav>                 
-            </Navbar.Collapse>
-        </Navbar>        
+                    { title }
+                </Navbar.Brand>
+                <Navbar.Toggle aria-controls='basic-navbar-nav' />
+                <Navbar.Collapse id='basic-navbar-nav'>
+                <Nav className='me-auto'>
+                    <Nav.Link
+                        as={Link} 
+                        to={{
+                            pathname: '/browse',
+                            state: { User }
+                        }}                
+                    >
+                        Read Reviews
+                    </Nav.Link>
+                    <Nav.Link 
+                        as={Link} 
+                        to={{
+                            pathname: '/write',
+                            state: { User }
+                        }}
+                    >
+                        Write Review
+                    </Nav.Link>
+                    <Form className='d-flex'>
+                        <FormControl
+                            type='search'
+                            placeholder='Search'
+                            className='mt-0 mb-0 mr-02'
+                            aria-label='Search'
+                        />
+                        <Button variant='success' size='sm'>Search</Button>
+                    </Form>                  
+                </Nav>          
+                <Nav className='pull-right user-tab'>
+                    { userTab }
+                </Nav>                 
+                </Navbar.Collapse>
+            </Navbar>        
+        </header>    
     )
 }
 

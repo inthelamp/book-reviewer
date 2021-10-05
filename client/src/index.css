@@ -6,20 +6,17 @@
   padding: 0;
 }
 
-body {
-  font-family: "Indie Flower", sans-serif;
+header {
+  margin-top: 2vmin;
+  text-align: right;    
 }
 
-.container {
-  max-width: 100vw;
-  margin: 10px auto;
-  overflow: auto;
-  min-height: 50vh;
-  padding: 10px;
-  border-radius: 5px;
+body {
+  font-family: "Indie Flower", sans-serif;
+  min-height: 70vmin;
 }
 
 footer {
-  margin-top: 30px;
-  text-align: center;
+  margin-top: 5vmin;
+  text-align: right;    
 }
