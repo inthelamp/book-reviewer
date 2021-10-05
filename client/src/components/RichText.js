@@ -45,18 +45,19 @@ const RichText = ({ setContent, reset }) => {
 
     const isChanged = editor.operations.some((op) => 'set_selection' !== op.type)
     if (isChanged) {
-      const content = JSON.stringify(value)
-      localStorage.setItem('content', content)
-      setContent(content)
+        const content = JSON.stringify(value)
+        localStorage.setItem('content', content)
+        setContent(content)
     }
   }
 
   useEffect(() => {
     if (reset) {
-      localStorage.removeItem('content')
-      setValue(InitialValue)
+        localStorage.removeItem('content')
+        Transforms.select(editor, [0]) 
+        setValue(InitialValue)
     }
-  }, [reset])
+  }, [reset, editor])
 
   return (
     <div className='editor'>

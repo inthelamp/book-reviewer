@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import { Button } from 'react-bootstrap'
@@ -17,10 +17,49 @@ const WriteReview = ( props ) => {
     const token = getTokenNotExpried()    
     const history = useHistory()
 
-    const onSave = (e) => {
-        e.preventDefault();        
+    // const onSave = (e) => {
+    //     e.preventDefault();        
 
-        if (!_.isEqual(content, JSON.stringify(InitialValue))) {
+    //     if (!_.isEqual(content, JSON.stringify(InitialValue))) {
+    //         if (User && User.isSignedIn) {
+    //             if (token) {
+    //                 const AuthString = 'token '.concat(token)
+
+    //                 axios
+    //                 .post(process.env.REACT_APP_SERVER_BASE_URL + '/reviews/post', { title: 'What is a good review?',
+    //                                                                                  content: content, 
+    //                                                                                  status: 'Draft' }, 
+    //                                                                                 { headers: { Authorization: AuthString }})
+    //                 .then((response) => {
+    //                     setIsSaved(true)
+    //                     setContent(JSON.stringify(InitialValue))
+    //                     setMessageStyle('success_message')   
+    //                     setMessage(response.data.message)       
+    //                 })
+    //                 .catch ((error) => {
+    //                     setMessageStyle('error_message')      
+    //                     if (error.response) {
+    //                       setMessage(error.response.data.message)                
+    //                     } else {
+    //                       console.log('Error', error.message)
+    //                     }
+    //                     setContent(InitialValue)
+    //                 })
+    //             }
+    //         } else {
+    //             history.push('/signin')
+    //         }  
+    //     } else {
+    //         setMessageStyle('error_message')
+    //         setMessage('No review is written.') 
+    //     }
+    // }
+
+
+    const onSave = (e) => {
+        // e.preventDefault();        
+
+
             if (User && User.isSignedIn) {
                 if (token) {
                     const AuthString = 'token '.concat(token)
@@ -32,6 +71,7 @@ const WriteReview = ( props ) => {
                                                                                     { headers: { Authorization: AuthString }})
                     .then((response) => {
                         setIsSaved(true)
+                        setContent(JSON.stringify(InitialValue))
                         setMessageStyle('success_message')   
                         setMessage(response.data.message)       
                     })
@@ -48,11 +88,18 @@ const WriteReview = ( props ) => {
             } else {
                 history.push('/signin')
             }  
-        } else {
-            setMessageStyle('error_message')
-            setMessage('No review is written.') 
-        }
     }
+
+    useEffect(() => {
+        const initialize = () => {
+            setMessage('')
+            setIsSaved(false)
+        }
+
+        if (isSaved && message && !_.isEqual(content, JSON.stringify(InitialValue))) {
+            initialize()
+        }
+    }, [isSaved, message, content])
 
     return (
         <>
