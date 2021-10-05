@@ -5,7 +5,6 @@ import {
   Editor,
   Transforms,
   createEditor,
-  Descendant,
   Element as SlateElement,
 } from 'slate'
 import { withHistory } from 'slate-history'
@@ -34,14 +33,26 @@ const HOTKEYS = {
 const LIST_TYPES = ['numbered-list', 'bulleted-list']
 
 const RichText = () => {
-  const [value, setValue] = useState(initialValue)
+  const [value, setValue] = useState(
+    JSON.parse(localStorage.getItem('content')) || initialValue
+  )
   const renderElement = useCallback(props => <Element {...props} />, [])
   const renderLeaf = useCallback(props => <Leaf {...props} />, [])
   const editor = useMemo(() => withHistory(withReact(createEditor())), [])
 
+  const onChange = (value) => {
+    setValue(value)
+
+    const isChanged = editor.operations.some((op) => 'set_selection' !== op.type)
+    if (isChanged) {
+      const content = JSON.stringify(value)
+      localStorage.setItem('content', content)
+    }
+  }
+
   return (
     <div className='editor'>
-      <Slate editor={editor} value={value} onChange={value => setValue(value)}>
+      <Slate editor={editor} value={value} onChange={value => onChange(value)}>
         <Navbar bg="light" expand='sm'>
           <Container>
             <MarkButton format="bold" icon={ <TypeBold /> } />
@@ -60,7 +71,7 @@ const RichText = () => {
         <Editable
           renderElement={renderElement}
           renderLeaf={renderLeaf}
-          placeholder="Enter some rich text…"
+          placeholder="Write a book review here..."
           spellCheck
           autoFocus
           onKeyDown={event => {
@@ -198,37 +209,7 @@ const MarkButton = ({ format, icon }) => {
 const initialValue = [
   {
     type: 'paragraph',
-    children: [
-      { text: 'This is editable ' },
-      { text: 'rich', bold: true },
-      { text: ' text, ' },
-      { text: 'much', italic: true },
-      { text: ' better than a ' },
-      { text: '<textarea>', code: true },
-      { text: '!' },
-    ],
-  },
-  {
-    type: 'paragraph',
-    children: [
-      {
-        text:
-          "Since it's rich text, you can do things like turn a selection of text ",
-      },
-      { text: 'bold', bold: true },
-      {
-        text:
-          ', or add a semantically rendered block quote in the middle of the page, like this:',
-      },
-    ],
-  },
-  {
-    type: 'block-quote',
-    children: [{ text: 'A wise quote.' }],
-  },
-  {
-    type: 'paragraph',
-    children: [{ text: 'Try it out for yourself!' }],
+    children: [{ text: '' }],
   },
 ]
 

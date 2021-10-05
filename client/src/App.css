@@ -7,6 +7,16 @@
   pointer-events: none;
 }
 
+.App-body {
+  min-height: 70vmin;
+}
+
 .App-link {
   color: #61dafb;
+}
+
+.App-Buttons {
+  width: 50vmax;
+  margin: auto;
+  text-align: center;
 }

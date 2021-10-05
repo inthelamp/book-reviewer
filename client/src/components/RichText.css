@@ -1,6 +1,9 @@
 .editor {
     width: 50vmax;
+    min-height: 40vmin;
+    cursor: text;
     font-family: "Times New Roman", sans-serif;
+    font-size: 16pt;
     margin: auto;
     border-collapse: separate;
     border-radius: 0.5em;

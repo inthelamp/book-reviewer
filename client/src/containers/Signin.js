@@ -8,7 +8,7 @@ import Message from '../components/Message'
 import { SignedIn } from '../features/Actions'
 import './Signin.css'
 
-const Signin = () => {
+const Signin = ( props ) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [message, setMessage] = useState('')

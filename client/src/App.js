@@ -12,19 +12,16 @@ import About from './containers/About'
 import './App.css'
 
 function App() {
-
   return (    
-    <Router>                  
+    <Router>                
       <div className='container'>           
-        <Header component={ Header } />      
-        <body>     
+        <Header component={ Header } />    
+        <div className='App-body'>   
           <Switch>
             <Route path='/' exact component={ Home } />              
             <Route path='/browse' component={ BrowseReview } />       
             <Route path='/write' component={ WriteReview } />          
-            <Route path='/signin'>
-              <Signin />
-            </Route>      
+            <Route path='/signin' component={ Signin } />
             <Route path='/signup'>
               <Signup />
             </Route>         
@@ -32,11 +29,11 @@ function App() {
             <Route path='/activate' component={ Activate } />   
             <Route path='/about' component={ About } />
           </Switch>
-        </body>
+        </div>
         <Footer />    
       </div>  
     </Router>     
-  );
+  )
 }
 
 export default App;
