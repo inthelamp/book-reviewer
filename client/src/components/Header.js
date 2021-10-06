@@ -8,7 +8,7 @@ import './Header.css'
 import logo from '../assets/images/logo.png'
 
 
-const Header = ( props ) => {
+const Header = () => {
     const title = process.env.REACT_APP_TITLE
     const storeUser = useSelector((state) => state)
     const User = Object.keys(storeUser).length === 0 ? persistentUser() : storeUser

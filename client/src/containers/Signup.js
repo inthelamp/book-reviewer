@@ -23,7 +23,7 @@ const Signup = () => {
 
     axios
     .post(process.env.REACT_APP_SERVER_BASE_URL + '/users/signup', {email, userName, password, confirmPassword})
-    .then((response) => {
+    .then(() => {
         setIsSignedUp(true)
     })
     .catch ((error) => {

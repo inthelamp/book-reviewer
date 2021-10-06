@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom'
 import { SignedOut } from '../features/Actions'
 import { getTokenNotExpried } from '../features/PersistentUser'
 
-const Signout = ( props ) => {    
+const Signout = () => {    
     const token = getTokenNotExpried()
 
     //Delete cookies
@@ -24,7 +24,7 @@ const Signout = ( props ) => {
 
                 axios
                 .get(process.env.REACT_APP_SERVER_BASE_URL + '/users/signout', { headers: { Authorization: AuthString } })
-                .then((response) => {          
+                .then(() => {          
                     clearCookies()         
                     dispatch(SignedOut())            //change status of user to sign-out                                   
                 })

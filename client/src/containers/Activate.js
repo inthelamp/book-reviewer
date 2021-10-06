@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import PropTypes from 'prop-types'
 import { Form, Button, Alert } from 'react-bootstrap'
 import axios from 'axios'
 import Message from '../components/Message'
@@ -61,6 +62,14 @@ const Activate = ( props ) => {
             </Form>
         </div>
     )
+}
+
+Activate.propTypes = {
+    location: PropTypes.shape({
+        state: PropTypes.shape({
+            email: PropTypes.string.isRequired,
+        }),
+    }),
 }
 
 export default Activate

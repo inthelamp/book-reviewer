@@ -1,6 +1,6 @@
 import { Alert } from 'react-bootstrap'
  
-const Home = ( props ) => {
+const Home = () => {
     return (
         <Alert variant='info'>
             Under Construction

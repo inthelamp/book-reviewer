@@ -1,4 +1,5 @@
 import { Form } from 'react-bootstrap'
+import PropTypes from 'prop-types'
 import './Message.css'
 
 const Message = ({ message, messageStyle }) => {
@@ -10,6 +11,11 @@ const Message = ({ message, messageStyle }) => {
                         <Form.Label className={messageStyle}>{message}</Form.Label> 
                     </>           
     )
+}
+
+Message.propTypes = {
+    message: PropTypes.string,
+    messageStyle: PropTypes.string
 }
 
 export default Message

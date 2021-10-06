@@ -1,4 +1,5 @@
 import React, { useCallback, useMemo, useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import isHotkey from 'is-hotkey'
 import { Editable, withReact, useSlate, Slate } from 'slate-react'
 import {
@@ -144,6 +145,7 @@ const isMarkActive = (editor, format) => {
   return marks ? marks[format] === true : false
 }
 
+/* eslint-disable react/prop-types */
 const Element = ({ attributes, children, element }) => {
   switch (element.type) {
     case 'block-quote':
@@ -214,6 +216,7 @@ const MarkButton = ({ format, icon }) => {
     </Button>
   )
 }
+/* eslint-enable react/prop-types */
 
 export const InitialValue = [
   {
@@ -221,5 +224,10 @@ export const InitialValue = [
     children: [{ text: '' }],
   },
 ]
+
+RichText.propTypes = {
+  setContent: PropTypes.func,
+  reset: PropTypes.bool
+}
 
 export default RichText
