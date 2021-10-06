@@ -2,17 +2,26 @@ import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Form, FormControl, Button, Nav, Navbar, NavDropdown } from 'react-bootstrap'
+import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { persistentUser } from '../features/PersistentUser'
+import UserRoles from './UserRoles'
 import './Header.css'
 import logo from '../assets/images/logo.png'
 
-
+/**
+ * A header containing navigation bar
+ */
 const Header = () => {
     const title = process.env.REACT_APP_TITLE
     const storeUser = useSelector((state) => state)
     const User = Object.keys(storeUser).length === 0 ? persistentUser() : storeUser
 
+
+    /**
+     * Getting a user name
+     * @param {object} user - an object containing name, role, and isSignedIn
+     * @returns {string} user name and its role is attached to the user name if the user has the admin role
+     */
     const getUserName = (user) => {
         let name = '' 
 
@@ -20,7 +29,7 @@ const Header = () => {
             const role = user.role        
             name = user.name
     
-            if (role === 'Admin') {
+            if (role === UserRoles.ADMIN) {
                 name = name + ' (' + role + ')'
             }
         }
@@ -28,9 +37,9 @@ const Header = () => {
         return name        
     }    
 
-    // attach Sign Out tab to user name if user name is available
     const userName = useMemo(() => getUserName(User), [User])
 
+    // Attach Sign Out tab to user name if user name is available
     const userTab = userName === '' ? 
                 (        
                     <Nav.Link href='/signin'>Sign In</Nav.Link>
@@ -43,10 +52,10 @@ const Header = () => {
                         </NavDropdown.Item>
                     </NavDropdown>
                 )     
-
-    // sign out when token is expired            
+       
     const history = useHistory()            
 
+    // Goto sign-out page when token is expired       
     const signOut = () => {
         history.push('/signout')
     }            
@@ -67,41 +76,13 @@ const Header = () => {
                         }}
                 >
                     { title }
-                </Navbar.Brand>
-                <Navbar.Toggle aria-controls='basic-navbar-nav' />
-                <Navbar.Collapse id='basic-navbar-nav'>
-                <Nav className='me-auto'>
-                    <Nav.Link
-                        as={Link} 
-                        to={{
-                            pathname: '/browse',
-                            state: { User }
-                        }}                
-                    >
-                        Read Reviews
-                    </Nav.Link>
-                    <Nav.Link 
-                        as={Link} 
-                        to={{
-                            pathname: '/write',
-                            state: { User }
-                        }}
-                    >
-                        Write Review
-                    </Nav.Link>
-                    <Form className='d-flex'>
-                        <FormControl
-                            type='search'
-                            placeholder='Search'
-                            className='mt-0 mb-0 mr-02'
-                            aria-label='Search'
-                        />
-                        <Button variant='success' size='sm'>Search</Button>
-                    </Form>                  
-                </Nav>          
-                <Nav className='pull-right user-tab'>
-                    { userTab }
-                </Nav>                 
+                </Navbar.Brand>          
+                <Navbar.Collapse id='basic-navbar-nav'>     
+                    <Nav className='me-auto'>
+                    </Nav>    
+                    <Nav className='pull-right user-tab'>
+                        { userTab }
+                    </Nav>                 
                 </Navbar.Collapse>
             </Navbar>        
         </header>    

@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom'
 import logo from '../assets/images/logo.png'
 
+/**
+ * A footer showing copy right
+ */
 const Footer = () => {
     return (
         <footer>

@@ -1,8 +1,7 @@
 import { createStore } from 'redux'
 import UserReducer from './UserReducer'
 
-
-//const rootReducer = combineReducers({User: UserReducer})
+// Creating store
 const Store = createStore(UserReducer)
 
 export default Store

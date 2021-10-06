@@ -1,5 +1,9 @@
 import jwt_decode from 'jwt-decode'
 
+/**
+ * Getting a token from cookie
+ * @returns {string} return token
+ */
 export const getToken = () => {
     const name = 'token='
     const decodedCookie = decodeURIComponent(document.cookie)
@@ -17,6 +21,10 @@ export const getToken = () => {
     return ''
 }
 
+/**
+ * Getting a token not expired from cookie
+ * @returns {string} return token
+ */
 export const getTokenNotExpried = () => {
     const token = getToken()
 
@@ -36,6 +44,10 @@ export const getTokenNotExpried = () => {
     return ''
 }
 
+/**
+ * Extracting user information from token
+ * @returns {onject} return user information, but return null if token is not available and retun isTokenExpired if token is expired
+ */
 export const persistentUser = () => {
     const token = getToken()
 

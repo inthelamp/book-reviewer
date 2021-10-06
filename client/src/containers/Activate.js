@@ -5,6 +5,9 @@ import axios from 'axios'
 import Message from '../components/Message'
 import './Activate.css'
 
+/**
+ * Activating user account with code sent by email
+ */
 const Activate = ( props ) => {
     const [code, setCode] = useState('')
     const [message, setMessage] = useState('')
@@ -12,6 +15,9 @@ const Activate = ( props ) => {
 
     const email =  (props.location && props.location.state.email) || ''
 
+    /**
+     * Sending activation request to server
+     */
     const onSubmit = (e) => {
         e.preventDefault()
 
@@ -32,6 +38,9 @@ const Activate = ( props ) => {
         })
     }
 
+    /**
+     * Checking if code given is not a blank
+     */
     const isValid = () => {
         return code.length > 0
     }
@@ -55,6 +64,8 @@ const Activate = ( props ) => {
                     onChange={(e) => setCode(e.currentTarget.value)}
                 />
                 </Form.Group> 
+
+                {/* Button is enabled when code is not an empty string */}
                 <Button size='lg' type='submit' disabled={!isValid()} >
                     Activate
                 </Button>                

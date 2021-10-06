@@ -1,5 +1,6 @@
 import ActionTypes from './ActionTypes'
 
+// User reducer
 const UserReducer = (state = [], action) => {
     switch(action.type) {
         case ActionTypes.SIGNED_IN:

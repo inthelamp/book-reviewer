@@ -10,6 +10,8 @@
 **/yarn-error.log
 **/.env
 **/*.rest
+**/.eslintrc.*
+**/*.backup.*
 doc/out/index.html
 doc/out/fonts/OpenSans-Bold-webfont.eot
 doc/out/fonts/OpenSans-Bold-webfont.svg

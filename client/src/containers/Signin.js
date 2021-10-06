@@ -8,6 +8,9 @@ import Message from '../components/Message'
 import { SignedIn } from '../features/Actions'
 import './Signin.css'
 
+/**
+ * Sign-in panel
+ */
 const Signin = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -17,18 +20,33 @@ const Signin = () => {
 
   const dispatch = useDispatch()
 
-  const addHours = ( date, hours ) => {
+  /**
+   * Adding hours to current time 
+   * @param {date} date - current date and time
+   * @param {number} hours  - hours to be added
+   * @returns {date} return date + hours
+   */
+  const addHours = (date, hours) => {
     return date.getTime() + (hours*60*60*1000)
   }
 
-  const setCookie = ( cookieName, value ) => {
+  /**
+   * Saving value to cookie
+   * @param {string} cookieName - key for the cookie
+   * @param {any} value - value to be stored
+   */
+  const setCookie = (cookieName, value) => {
     const today = new Date()
     today.setTime(addHours(today, process.env.REACT_APP_COOKIE_SUSTAINING_HOURS))
     const expires = 'expires='+ today.toUTCString()
     document.cookie = cookieName + '=' + value + '; SameSite=strict; Secure;' + expires + '; path=/'
   }
 
-  const saveUser = (token) => {
+  /**
+   * Dispatching SignedIn action
+   * @param {string} token - token from which name and role are derived 
+   */
+  const dispatchSignedIn = (token) => {
     if (token) {      
       try {
           const decoded = jwt_decode(token)
@@ -39,14 +57,16 @@ const Signin = () => {
     } 
   }
 
+  // Processing sign-in
   const onSubmit = (e) => {
     e.preventDefault()
 
+    // Sending sign-in request to server
     axios
     .post(process.env.REACT_APP_SERVER_BASE_URL + '/users/signin', {email, password})
     .then((response) => {
         setCookie('token', response.data.accessToken)
-        saveUser(response.data.accessToken)
+        dispatchSignedIn(response.data.accessToken)
         setIsSignedIn(true)
     })
     .catch ((error) => {
@@ -59,10 +79,14 @@ const Signin = () => {
     })
   }
 
+  /**
+  * Checking if email and password are provided
+  */
   const isValid = () => {
     return email.length > 0 && password.length > 0
   }  
 
+  // Go to home page afrer sign-in
   if (isSignedIn) {
     return <Redirect to='/' />
   }

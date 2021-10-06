@@ -33,6 +33,12 @@ const HOTKEYS = {
 
 const LIST_TYPES = ['numbered-list', 'bulleted-list']
 
+/**
+ * Slate editor customized for this site
+ * @param {func} setContent - a function for parent component to get content changed   
+ * @param {boolean} reset - informing if this component is initialized or not
+ * @returns UI to compose article with some basic features 
+ */
 const RichText = ({ setContent, reset }) => {
   const [value, setValue] = useState(
       JSON.parse(localStorage.getItem('content')) || InitialValue
@@ -48,10 +54,11 @@ const RichText = ({ setContent, reset }) => {
     if (isChanged) {
         const content = JSON.stringify(value)
         localStorage.setItem('content', content)
-        setContent(content)
+        setContent(content)  // Let parent component know the content changed
     }
   }
 
+  // Initializing local storage, and Slate componemts
   useEffect(() => {
     if (reset) {
         localStorage.removeItem('content')

@@ -14,13 +14,18 @@ const Signup = () => {
   const [messageStyle, setMessageStyle] = useState('')
   const [isSignedUp, setIsSignedUp] = useState(false)
 
+  /**
+  * Checking input values
+  */
   const isValid = () => {
     return email.length > 0 && userName.length > 0 && password.length > 0 && confirmPassword.length > 0 && password === confirmPassword
   }  
 
+  // Processing sign-up
   const onSubmit = (e) => {
     e.preventDefault();
 
+    // Sending sign-up request to server
     axios
     .post(process.env.REACT_APP_SERVER_BASE_URL + '/users/signup', {email, userName, password, confirmPassword})
     .then(() => {
@@ -36,6 +41,7 @@ const Signup = () => {
     })
   }
 
+  // Checking password when it changes
   const onChangePassword = (e) => {    
     setPassword(e.currentTarget.value)
 
@@ -54,6 +60,7 @@ const Signup = () => {
     }
   } 
 
+  // Checking confirm password when it changes
   const onChangeConfirmPassword = (e) => {    
     setConfirmPassword(e.currentTarget.value)
 
@@ -67,6 +74,7 @@ const Signup = () => {
     }
   }
 
+  // Go to home page when sign-up completes
   if (isSignedUp) {
     return <Redirect to={{
             pathname: '/activate',

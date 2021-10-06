@@ -1,6 +1,9 @@
 import { Alert } from 'react-bootstrap'
 
-const BrowseReview = () => {
+/**
+ * Reviews posted in public 
+ */
+const Reviews = () => {
     return (
         <Alert variant='info'>
             Under Construction
@@ -8,4 +11,4 @@ const BrowseReview = () => {
     )
 }
 
-export default BrowseReview
+export default Reviews
