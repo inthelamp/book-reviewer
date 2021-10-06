@@ -1,4 +1,3 @@
-const { object } = require("joi");
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
@@ -13,6 +12,7 @@ const Schema = mongoose.Schema;
 	INACTIVE: "Inactive"
 };
 
+// Review schema
 const reviewSchema = new Schema(
   {
     reviewId: { type: String, unique: true, required: true },

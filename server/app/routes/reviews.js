@@ -4,6 +4,6 @@ const router = express.Router();
 const { verifyJwt } = require("../middlewares/verifyJwt");
 const review = require("../controllers/review");
 
-router.post("/post", verifyJwt, review.Post);
+router.post("/publish", verifyJwt, review.Publish);
 
 module.exports = router;

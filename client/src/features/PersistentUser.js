@@ -46,7 +46,7 @@ export const getTokenNotExpried = () => {
 
 /**
  * Extracting user information from token
- * @returns {onject} return user information, but return null if token is not available and retun isTokenExpired if token is expired
+ * @returns {object} return user information, but return null if token is not available and retun isTokenExpired if token is expired
  */
 export const persistentUser = () => {
     const token = getToken()

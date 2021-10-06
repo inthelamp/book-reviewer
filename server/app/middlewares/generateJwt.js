@@ -1,11 +1,17 @@
 const jwt = require("jsonwebtoken");
-
 require("dotenv").config();
 
 const options = {
-  expiresIn: process.env.TOKEN_EXPIRE_IN,
+  expiresIn: process.env.SIGNIN_TOKEN_EXPIRE_IN, // Setting token expiry time
 };
 
+/**
+ * Generating a token containing id, name, and role
+ * @param {string} userId - user unique id
+ * @param {string} userName - user name
+ * @param {string} role - user role
+ * @returns {boolean, string} {error, token}
+ */
 exports.generateJwt = async (userId, userName, role) => {
   try {
     const payload = { 

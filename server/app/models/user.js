@@ -23,6 +23,8 @@ const Roles = {
 	USER: "User"
 };
 
+
+// User schema
 const userSchema = new Schema(
   {
     userId: { type: String, unique: true, required: true },
@@ -52,6 +54,11 @@ const Model = mongoose.model("user", userSchema);
 
 module.exports = { Statuses, Roles, Model };
 
+/**
+ * Getting hash
+ * @param {string} inputPassword - input password 
+ * @returns {string} hashed password 
+ */
 module.exports.hashPassword = async (inputPassword) => {
   try {
     const salt = await bcrypt.genSalt(10);
@@ -61,6 +68,12 @@ module.exports.hashPassword = async (inputPassword) => {
   }
 };
 
+/**
+ * Verifying password with hash
+ * @param {string} inputPassword - input password
+ * @param {string}} hashedPassword - hashed password
+ * @returns {boolean} showing if it is valid or not
+ */
 module.exports.verifyPassword = async (inputPassword, hashedPassword) => {
   try {
     return await bcrypt.compare(inputPassword, hashedPassword);

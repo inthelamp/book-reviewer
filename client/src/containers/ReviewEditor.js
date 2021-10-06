@@ -3,9 +3,9 @@ import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 import { Button } from 'react-bootstrap'
-import RichText, { InitialValue } from './RichText'
+import RichText, { InitialValue } from '../components/RichText'
 import { getTokenNotExpried } from '../features/PersistentUser'
-import Message from './Message'
+import Message from '../components/Message'
 
 // for checking array equality
 const _ = require('lodash');
@@ -40,7 +40,7 @@ const ReviewEditor = ( props ) => {
 
                     // Send request to server to save review
                     axios
-                    .post(process.env.REACT_APP_SERVER_BASE_URL + '/reviews/post', { title: 'What is a good review?',
+                    .post(process.env.REACT_APP_SERVER_BASE_URL + '/reviews/publish', { title: 'What is a good review?',
                                                                                      content: content, 
                                                                                      status: 'Draft' }, 
                                                                                     { headers: { Authorization: AuthString }})

@@ -2,6 +2,11 @@ require("dotenv").config();
 
 const nodemailer = require("nodemailer");
 
+/**
+ * Composing and sending email
+ * @param {string} email - email address which the email is sent to 
+ * @param {string} code  - verification code
+ */
 exports.sendEmail = async (email, code) => {
   try {
     const smtpEndpoint = process.env.SMTP_SERVER;
@@ -15,7 +20,7 @@ exports.sendEmail = async (email, code) => {
 
     var subject = "Verify your email";
 
-    // The body of the email for recipients
+    // The body of the email to be sent
     var body_html = `<!DOCTYPE> 
     <html>
       <body>
@@ -23,7 +28,7 @@ exports.sendEmail = async (email, code) => {
       </body>
     </html>`;
 
-    // Create the SMTP transport.
+    // Creating the SMTP transport.
     let transporter = nodemailer.createTransport({
       host: smtpEndpoint,
       port: port,
@@ -34,15 +39,16 @@ exports.sendEmail = async (email, code) => {
       },
     });
 
-    // Specify the fields in the email.
-    let mailOptions = {
+    // Defining email object
+    let mailObject = {
       from: senderAddress,
       to: toAddress,
       subject: subject,
       html: body_html,
     };
 
-    let info = await transporter.sendMail(mailOptions);
+    // Sending email
+    let info = await transporter.sendMail(mailObject);
 
     return { error: false };
 
