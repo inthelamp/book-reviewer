@@ -2,9 +2,12 @@
  * Action types
  * @enum {string}
  */
-const ActionTypes = {
+export const User = {
 	SIGNED_IN: 'signedIn',
 	SIGNED_OUT: 'signedOut'
 }
 
-export default ActionTypes
+export const TextEditor = {
+	CHANGED_MODE_TO_BROWSE: 'changedModeToBrowse',
+	CHANGED_MODE_TO_EDIT: 'changedModeToEdit',
+}

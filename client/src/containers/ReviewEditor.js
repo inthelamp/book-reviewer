@@ -12,13 +12,14 @@ const _ = require('lodash');
 
 /**
  * Review Editor where user is typing, updating and saving a book review
+ * @param {string} id - User id
+ * @param {bool} isSignedIn - Presenting if user is signed in or not
  */
-const ReviewEditor = ( props ) => {    
+const ReviewEditor = ( { userId, isSignedIn } )  => {    
     const [message, setMessage] = useState('')
     const [messageStyle, setMessageStyle] = useState('')
     const [isSaved, setIsSaved] = useState(false)
     const [content, setContent] = useState(localStorage.getItem('content') || JSON.stringify(InitialValue))
-    const User =  (props.location && props.location.state.User) || ''
     const token = getTokenNotExpried()    
     const history = useHistory()
 
@@ -32,7 +33,7 @@ const ReviewEditor = ( props ) => {
         if (!_.isEqual(content, JSON.stringify(InitialValue))) {
 
             // Checking if user is signed in
-            if (User && User.isSignedIn) {   
+            if (userId && isSignedIn) {   
 
                 // Checking if token not expired exists 
                 if (token) {
@@ -40,10 +41,12 @@ const ReviewEditor = ( props ) => {
 
                     // Send request to server to save review
                     axios
-                    .post(process.env.REACT_APP_SERVER_BASE_URL + '/reviews/publish', { title: 'What is a good review?',
-                                                                                     content: content, 
-                                                                                     status: 'Draft' }, 
-                                                                                    { headers: { Authorization: AuthString }})
+                    .post(process.env.REACT_APP_SERVER_BASE_URL + '/reviews/publish',   {  
+                                                                                            title: 'What is a good review?',
+                                                                                            content: content, 
+                                                                                            status: 'Draft' 
+                                                                                        }, 
+                                                                                        { headers: { Authorization: AuthString, UserId: userId }})
                     .then((response) => {
                         setIsSaved(true)
                         setContent(JSON.stringify(InitialValue))
@@ -94,13 +97,8 @@ const ReviewEditor = ( props ) => {
 }
 
 ReviewEditor.propTypes = {
-    location: PropTypes.shape({
-        state: PropTypes.shape({
-            User: PropTypes.shape({
-                isSignedIn: PropTypes.bool,
-            }),
-        }),
-    }),
+    userId: PropTypes.string,
+    isSignedIn: PropTypes.bool.isRequired
 }
 
 export default ReviewEditor

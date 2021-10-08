@@ -1,0 +1,8 @@
+.review {
+    margin-top: 1vmin;
+}
+
+.scrollable {
+    max-height: 30vmin;
+    overflow-y: auto;
+}

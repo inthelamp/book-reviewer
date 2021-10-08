@@ -18,16 +18,22 @@ const Signin = () => {
   const [messageStyle, setMessageStyle] = useState('')
   const [isSignedIn, setIsSignedIn] = useState(false)
 
-  const dispatch = useDispatch()
+  /**
+   * @typedef {Object} User
+   * @property {string} id - User id
+   * @property {string} name - User name
+   * @property {string} role - User role
+   */  
+  const [User, setUser] = useState()
 
   /**
    * Adding hours to current time 
-   * @param {date} date - current date and time
+   * @param {date} date - current date time
    * @param {number} hours  - hours to be added
-   * @returns {date} return date + hours
+   * @returns {date} return sum of date time and hours
    */
   const addHours = (date, hours) => {
-    return date.getTime() + (hours*60*60*1000)
+      return date.getTime() + (hours*60*60*1000)
   }
 
   /**
@@ -36,89 +42,116 @@ const Signin = () => {
    * @param {any} value - value to be stored
    */
   const setCookie = (cookieName, value) => {
-    const today = new Date()
-    today.setTime(addHours(today, process.env.REACT_APP_COOKIE_SUSTAINING_HOURS))
-    const expires = 'expires='+ today.toUTCString()
-    document.cookie = cookieName + '=' + value + '; SameSite=strict; Secure;' + expires + '; path=/'
+      const today = new Date()
+      today.setTime(addHours(today, process.env.REACT_APP_COOKIE_SUSTAINING_HOURS))
+      const expires = 'expires='+ today.toUTCString()
+      document.cookie = cookieName + '=' + value + '; SameSite=strict; Secure;' + expires + '; path=/'
   }
-
+  
   /**
-   * Dispatching SignedIn action
-   * @param {string} token - token from which name and role are derived 
+   * Getting user information from token
+   * @param {string} token - token from which id, name and role are derived 
+   * @returns {User} returns user information
    */
-  const dispatchSignedIn = (token) => {
-    if (token) {      
-      try {
-          const decoded = jwt_decode(token)
-          dispatch(SignedIn(decoded.name, decoded.role))
-      } catch (error) {
-          console.log(error)
-      }
-    } 
-  }
-
-  // Processing sign-in
-  const onSubmit = (e) => {
-    e.preventDefault()
-
-    // Sending sign-in request to server
-    axios
-    .post(process.env.REACT_APP_SERVER_BASE_URL + '/users/signin', {email, password})
-    .then((response) => {
-        setCookie('token', response.data.accessToken)
-        dispatchSignedIn(response.data.accessToken)
-        setIsSignedIn(true)
-    })
-    .catch ((error) => {
-        setMessageStyle('error_message')      
-        if (error.response) {
-          setMessage(error.response.data.message)                
-        } else {
-          console.log('Error', error.message)
+    const getUser = (token) => {
+      if (token) {      
+        try {
+            const user = jwt_decode(token)
+            return user
+        } catch (error) {
+            console.log(error)
         }
-    })
-  }
+      } 
 
-  /**
-  * Checking if email and password are provided
-  */
-  const isValid = () => {
-    return email.length > 0 && password.length > 0
-  }  
+      return null
+    }
 
-  // Go to home page afrer sign-in
-  if (isSignedIn) {
-    return <Redirect to='/' />
-  }
+    const dispatch = useDispatch()
+    
+    /**
+     * Dispatching SignedIn action
+     * @param {User} user - user information 
+     */
+    const dispatchSignedIn = (user) => {
+      if (user) {      
+        try {
+            const {id, name, role} = user  
+            dispatch(SignedIn(id, name, role))
+        } catch (error) {
+            console.log(error)
+        }
+      } 
+    }
 
-  return (
-    <div className='signin'>
-      <Form onSubmit={onSubmit}>
-        <Form.Group size='lg' controlId='email'>
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            autoFocus
-            type='email'
-            value={email}
-            onChange={(e) => setEmail(e.currentTarget.value)}
+    // Processing sign-in
+    const onSubmit = (e) => {
+      e.preventDefault()
+
+      // Sending sign-in request to server
+      axios
+      .post(process.env.REACT_APP_SERVER_BASE_URL + '/users/signin', {email, password})
+      .then((response) => {
+          setCookie('token', response.data.accessToken) // Saving token to cookie
+          let user = getUser(response.data.accessToken)
+          setUser({id: user.id, name: user.name, role: user.role, isSignedIn: true})          
+          dispatchSignedIn(user)
+          setIsSignedIn(true)
+          console.log('Sign-in', response.data.message + ' (' + user.id + ')')
+      })
+      .catch ((error) => {
+          setMessageStyle('error_message')      
+          if (error.response) {
+            setMessage(error.response.data.message)                
+          } else {
+            console.log('Error', error.message)
+          }
+      })
+    }
+
+    /**
+    * Checking if email and password are provided
+    */
+    const isValid = () => {
+      return email.length > 0 && password.length > 0
+    }  
+
+    // Go to home page afrer sign-in
+    if (isSignedIn) {
+        return <Redirect  to={{
+              pathname: '/',
+              state: { User }
+        }}
         />
-        </Form.Group>
-        <Form.Group size='lg' controlId='password'>
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type='password'
-            value={password}
-            onChange={(e) => setPassword(e.currentTarget.value)}
+    }
+
+    return (
+      <div className='signin'>
+        <Form onSubmit={onSubmit}>
+          <Form.Group size='lg' controlId='email'>
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              autoFocus
+              type='email'
+              value={email}
+              onChange={(e) => setEmail(e.currentTarget.value)}
           />
-        </Form.Group>
-        <Button size='lg' type='submit' disabled={!isValid()} > 
-          Sign In
-        </Button>
-        <Message message={message} messageStyle={messageStyle}/>
-        <p>New Book Reviewer?&nbsp;<NavLink to='/signup'>Create an account</NavLink></p>
-      </Form>      
-    </div>
-  )
+          </Form.Group>
+          <Form.Group size='lg' controlId='password'>
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type='password'
+              value={password}
+              onChange={(e) => setPassword(e.currentTarget.value)}
+            />
+          </Form.Group>
+          <Button size='lg' type='submit' disabled={!isValid()} > 
+            Sign In
+          </Button>
+          <Message message={message} messageStyle={messageStyle}/>
+          <p>New Book Reviewer?&nbsp;<NavLink to='/signup'>Create an account</NavLink></p>
+        </Form>      
+      </div>
+    )
 }
 
 export default Signin

@@ -9,6 +9,7 @@ const User = require("../models/user");
  */
 exports.verifyJwt = async (req, res, next) => {
   const authorizationHeader = req.headers.authorization;
+  const id = req.headers.userid;
 
   let result;
 
@@ -34,7 +35,7 @@ exports.verifyJwt = async (req, res, next) => {
     });
 
     // Making an error if not found
-    if (!user) {
+    if (!user || user.userId !== id ) {
       result = {
         error: true,
         message: "Authorization error",

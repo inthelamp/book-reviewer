@@ -54,10 +54,11 @@ export const persistentUser = () => {
     if (token) {      
         try {
             const decoded = jwt_decode(token)     
-            const { name, role, exp } = decoded
+            const { id, name, role, exp } = decoded
 
             if (Date.now() < exp * 1000) { 
                 return {
+                    id,
                     name,
                     role,
                     "isSignedIn": true

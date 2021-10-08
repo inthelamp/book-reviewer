@@ -1,7 +1,7 @@
+import 'bootstrap/dist/css/bootstrap.min.css'
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { persistentUser } from '../features/PersistentUser'
 import UserRoles from './UserRoles'
@@ -13,13 +13,20 @@ import logo from '../assets/images/logo.png'
  */
 const Header = () => {
     const title = process.env.REACT_APP_TITLE
-    const storeUser = useSelector((state) => state)
-    const User = Object.keys(storeUser).length === 0 ? persistentUser() : storeUser
 
+    /**
+     * @typedef {Object} User
+     * @property {string} id - User id
+     * @property {string} name - User name
+     * @property {string} role - User role
+     * @property {bool} isSignedIn - presenting if user is signed in or not
+     */  
+    const storeUser = useSelector((state) => state.User)
+    const User = Object.keys(storeUser).length === 0 ? persistentUser() : storeUser
 
     /**
      * Getting a user name
-     * @param {object} user - an object containing name, role, and isSignedIn
+     * @param {User} user - an object containing name, role, and isSignedIn
      * @returns {string} user name and its role is attached to the user name if the user has the admin role
      */
     const getUserName = (user) => {
@@ -47,7 +54,13 @@ const Header = () => {
                 : 
                 (
                     <NavDropdown title={userName} id='user-nav-dropdown'>
-                        <NavDropdown.Item href='/signout'>
+                        <NavDropdown.Item
+                            as={Link}  
+                            to={{
+                                pathname: '/signout',
+                                state: { User }
+                            }}
+                        >
                             Sign Out
                         </NavDropdown.Item>
                     </NavDropdown>

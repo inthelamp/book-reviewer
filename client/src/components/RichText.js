@@ -233,8 +233,8 @@ export const InitialValue = [
 ]
 
 RichText.propTypes = {
-  setContent: PropTypes.func,
-  reset: PropTypes.bool
+  setContent: PropTypes.func.isRequired,
+  reset: PropTypes.bool.isRequired
 }
 
 export default RichText

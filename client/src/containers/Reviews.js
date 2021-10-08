@@ -1,14 +1,31 @@
-import { Alert } from 'react-bootstrap'
+import PropTypes from 'prop-types'
+import MyReviews from '../components/MyReviews'
+import OtherReviews from '../components/OtherReviews'
+import './Review.css'
 
 /**
  * Reviews posted in public 
  */
-const Reviews = () => {
+const Reviews = ( {userId, isSignedIn }) => {
+
     return (
-        <Alert variant='info'>
-            Under Construction
-        </Alert>    
+        <div className='review'>
+            { isSignedIn ? ( <div>
+                                <h4>My Reviews</h4> 
+                                <MyReviews userId={userId} isSignedIn={isSignedIn}/> 
+                             </div>
+                           ) : '' }
+            <>
+                <h4>Other Reviews</h4>
+                <OtherReviews userId={userId} />
+            </>
+        </div>
     )
+}
+
+Reviews.propTypes = {
+    userId: PropTypes.string,
+    isSignedIn: PropTypes.bool.isRequired
 }
 
 export default Reviews

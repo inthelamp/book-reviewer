@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Home from './containers/Home'
+// import ReviewDetail from './components/ReviewDetail'
 import Signin from './containers/Signin'
 import Signout  from './containers/Signout'
 import Signup from './containers/Signup'
@@ -16,7 +17,8 @@ function App() {
         <Header component={ Header } />    
         <div className='App-body'>   
           <Switch>
-            <Route path='/' exact component={ Home } />                     
+            <Route path='/' exact component={ Home } />          
+            {/* <Route path='/review' component={ ReviewDetail } />                                   */}
             <Route path='/signin' component={ Signin } />
             <Route path='/signup'>
               <Signup />
