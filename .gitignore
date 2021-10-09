@@ -12,4 +12,3 @@
 **/*.rest
 **/.eslintrc.*
 **/*.backup.*
-**/doc/out
