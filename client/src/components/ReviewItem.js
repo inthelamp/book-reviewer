@@ -1,35 +1,44 @@
-import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Button } from 'react-bootstrap'
+import { ChangedModeToBrowse } from '../features/Actions'
 
 /**
  * @typedef {Object} Review
- * @property {string} id - Review id
- * @property {string} title - Review title
+ * @property {string} reviewId - Review id
+ * @property {subject} subject - Review subject
+ * @property {bool} isOwner - presenting if the user is the owner of the review or not
  * @property {string} status - Review status
  */ 
 /**
- * Displaying review title and button
+ * Displaying review subject and button
  * @param {Review} review - Review object 
  */
 const ReviewItem = ( { review } ) => {
-    const history = useHistory();
+
+    const dispatch = useDispatch()
+    
+    /**
+     * Dispatching ChangedModeToBrowse action
+     */
+    const dispatchChangedModeToBrowse = (review) => {
+        try {
+            dispatch(ChangedModeToBrowse(review))
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     const onSubmit = (e) => {        
         e.preventDefault()
 
-        history.push(
-            { 
-                pathname: '/',
-                state: { Review: review }
-            }
-        )
+        dispatchChangedModeToBrowse(review)
     }
 
     return ( 
         <div>
-            {review.title} &nbsp;
-            <Button className="float-end" variant='secondary' size="sm" onClick={(e) => onSubmit(e)}>
+            {review.subject} &nbsp;
+            <Button className='float-end' variant='secondary' size='sm' onClick={(e) => onSubmit(e)}>
                 Read
             </Button>
         </div>
@@ -39,7 +48,7 @@ const ReviewItem = ( { review } ) => {
 ReviewItem.propTypes = {
     review: PropTypes.shape({
             id: PropTypes.string,
-            title: PropTypes.string,
+            subject: PropTypes.string,
             status: PropTypes.string        
     })
 }

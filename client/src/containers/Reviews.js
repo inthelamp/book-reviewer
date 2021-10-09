@@ -4,7 +4,7 @@ import OtherReviews from '../components/OtherReviews'
 import './Review.css'
 
 /**
- * Reviews posted in public 
+ * Reviews posted
  */
 const Reviews = ( {userId, isSignedIn }) => {
 
@@ -16,7 +16,7 @@ const Reviews = ( {userId, isSignedIn }) => {
                              </div>
                            ) : '' }
             <>
-                <h4>Other Reviews</h4>
+                <h4>Reviews</h4>
                 <OtherReviews userId={userId} />
             </>
         </div>

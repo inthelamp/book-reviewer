@@ -127,7 +127,7 @@ const Signin = () => {
     return (
       <div className='signin'>
         <Form onSubmit={onSubmit}>
-          <Form.Group size='lg' controlId='email'>
+          <Form.Group className='mb-3' size='lg' controlId='email'>
             <Form.Label>Email</Form.Label>
             <Form.Control
               autoFocus
@@ -136,7 +136,7 @@ const Signin = () => {
               onChange={(e) => setEmail(e.currentTarget.value)}
           />
           </Form.Group>
-          <Form.Group size='lg' controlId='password'>
+          <Form.Group className='mb-3' size='lg' controlId='password'>
             <Form.Label>Password</Form.Label>
             <Form.Control
               type='password'

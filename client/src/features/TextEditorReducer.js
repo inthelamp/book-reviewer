@@ -1,4 +1,4 @@
-import { TextEditor} from './ActionTypes'
+import { TextEditor } from './ActionTypes'
 
 // TextEditor reducer
 const TextEditorReducer = (state = [], action) => {
@@ -6,15 +6,17 @@ const TextEditorReducer = (state = [], action) => {
         case TextEditor.CHANGED_MODE_TO_BROWSE:
             return {
                 ...state, 
-                mode: 'browse',           
+                review: action.payload.review,   
+                mode: TextEditor.CHANGED_MODE_TO_BROWSE,           
             }
             
         case TextEditor.CHANGED_MODE_TO_EDIT:
             return {
                 ...state, 
-                mode: 'edit'
+                review: action.payload.review,                
+                mode: TextEditor.CHANGED_MODE_TO_EDIT
             }
-                     
+            
         default:
             return state    
     }

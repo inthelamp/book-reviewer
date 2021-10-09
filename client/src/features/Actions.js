@@ -1,4 +1,4 @@
-import { User, TextEditor } from './ActionTypes'
+import { User, TextEditor, Review } from './ActionTypes'
 
 /**
  * SignedIn action
@@ -21,11 +21,27 @@ export const SignedOut = () => ({
 })
 
 // ChangedModeToBrowse action
-export const ChangedModeToBrowse = () => ({
-    type: TextEditor.CHANGED_MODE_TO_BROWSE
+export const ChangedModeToBrowse = (review) => ({
+    type: TextEditor.CHANGED_MODE_TO_BROWSE,
+    payload: {
+        review
+    }
 })
 
 // ChangedModeToEdit action
-export const ChangedModeToEdit = () => ({
-    type: TextEditor.CHANGED_MODE_TO_EDIT
+export const ChangedModeToEdit = (review) => ({
+    type: TextEditor.CHANGED_MODE_TO_EDIT,
+    payload: {
+        review
+    }
+})
+
+// PostedReview action
+export const PostedReview = () => ({
+    type: Review.POSTED_REVIEW
+})
+
+// ListedReview action
+export const ListedReview = () => ({
+    type: Review.LISTED_REVIEW
 })

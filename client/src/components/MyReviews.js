@@ -1,20 +1,27 @@
 import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 import { ListGroup } from 'react-bootstrap'
 import axios from 'axios'
+import { Review } from '../features/ActionTypes'
+import { ListedReview } from '../features/Actions'
 import { getTokenNotExpried } from '../features/PersistentUser'
 import ReviewItem from '../components/ReviewItem'
 
 /**
- * List reviews posted by the user who is signed in
+ * List reviews posted by the user
  * @param {string} userId - User id
- * @param {bool} isSignedIn - presenting if user is signed in or not 
+ * @param {bool} isSignedIn - presenting if user is signed in or not
  */
-const MyReviews = ( { userId, isSignedIn }) => {
+const MyReviews = ({ userId, isSignedIn }) => {
+    // Redux selector for Review status
+    const ReviewStore = useSelector((state) => state.Review)
+
     /**
      * @typedef {Object} Review
      * @property {string} reviewId - Review id
-     * @property {title} title - Review title
+     * @property {subject} subject - Review subject
+     * @property {bool} isOwner - presenting if the user is the owner of the review or not
      * @property {string} status - Review status
      */ 
     const [reviews, setReviews] = useState()
@@ -22,16 +29,30 @@ const MyReviews = ( { userId, isSignedIn }) => {
     // Getting token not expired
     const token = getTokenNotExpried()
 
+    const dispatch = useDispatch()
+
+    /**
+     * Dispatching ListedReview action
+     */
+     const dispatchListedReview = () => {
+        try {
+            dispatch(ListedReview())
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     // Getting my reviews  
     useEffect(() => {  
-        if (userId && isSignedIn && token) {      
+        if (userId && isSignedIn && token && ReviewStore.status !== Review.LISTED_REVIEW) {      
             const AuthString = 'token '.concat(token)
 
             // Sending server a request to get my reviews
             axios
             .get(process.env.REACT_APP_SERVER_BASE_URL + '/reviews/myreviews', { headers: { Authorization: AuthString, UserId: userId } })
             .then((response) => {    
-                setReviews(response.data.reviews)      
+                setReviews(response.data.reviews) 
+                dispatchListedReview()
                 console.log(response.data.message)                      
             })
             .catch ((error) => {   
@@ -42,7 +63,7 @@ const MyReviews = ( { userId, isSignedIn }) => {
                 }
             })   
         } 
-    }, [token]); 
+    }, [token, ReviewStore.status]); 
 
     return (<>
                 {reviews ? ( <ListGroup className='scrollable'>

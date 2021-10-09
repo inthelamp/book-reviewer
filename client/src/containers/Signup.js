@@ -5,6 +5,9 @@ import axios from 'axios'
 import Message from '../components/Message'
 import './Signup.css'
 
+/**
+ * Sign-up panel
+ */
 const Signup = () => {
   const [email, setEmail] = useState('')
   const [userName, setUserName] = useState('') 
@@ -85,7 +88,7 @@ const Signup = () => {
   return (
     <div className='signup'> 
       <Form onSubmit={onSubmit}>
-      <Form.Group size='lg' controlId='email'>
+      <Form.Group class='mb-3' size='lg' controlId='email'>
         <Form.Label>Email</Form.Label>
         <Form.Control
           autoFocus
@@ -94,7 +97,7 @@ const Signup = () => {
           onChange={(e) => setEmail(e.currentTarget.value)}
       />
       </Form.Group>      
-      <Form.Group size='lg' controlId='userName'>
+      <Form.Group className='mb-3' size='lg' controlId='userName'>
         <Form.Label>User Name</Form.Label>
         <Form.Control
           type='text'
@@ -102,9 +105,9 @@ const Signup = () => {
           onChange={(e) => setUserName(e.currentTarget.value)}
       />      
       </Form.Group>
-      <Form.Group size='lg' controlId='password'>
+      <Form.Group className='mb-3' size='lg' controlId='password'>
         <Form.Label>Password</Form.Label>
-        <Form.Control
+        <Form.Control className='mb-3'
           type='password'
           value={password}
           onChange={onChangePassword}

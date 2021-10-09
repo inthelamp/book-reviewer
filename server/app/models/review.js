@@ -17,8 +17,13 @@ const reviewSchema = new Schema(
   {
     reviewId: { type: String, unique: true, required: true },
     userId: { type: String, required: true },
-    title: { type: String },    
+    subject: { type: String },    
     bookTitle: { type: String },
+    bookAuthors: { 
+       firstAuthor: { type: String },
+       secondAuthor: { type: String },
+       thirdAuthor: { type: String },
+    },
     isbn: { type: String },
     bookCoverImage: {  
         data: Buffer,

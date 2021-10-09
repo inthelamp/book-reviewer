@@ -58,7 +58,7 @@ const Signout = ( props ) => {
                 dispatch(SignedOut())            // Changing status of user to sign-out  
             }         
         } 
-        return () => { isMounted = false };  //clean up
+        return () => { isMounted = false } //clean up
     }, [token, dispatch]); 
 
     return  <Redirect to='/' />

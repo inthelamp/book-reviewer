@@ -9,5 +9,10 @@ export const User = {
 
 export const TextEditor = {
 	CHANGED_MODE_TO_BROWSE: 'changedModeToBrowse',
-	CHANGED_MODE_TO_EDIT: 'changedModeToEdit',
+	CHANGED_MODE_TO_EDIT: 'changedModeToEdit'
+}
+
+export const Review = {
+	POSTED_REVIEW: 'postedReview',
+	LISTED_REVIEW: 'listedReview'
 }

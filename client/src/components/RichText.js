@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState, useEffect } from 'react'
+import { useCallback, useMemo, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import isHotkey from 'is-hotkey'
 import { Editable, withReact, useSlate, Slate } from 'slate-react'

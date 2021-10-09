@@ -6,7 +6,7 @@ const Review  = require("../models/review");
 // Validating review data from client
 const reviewSchema = Joi.object().keys({
   content: Joi.required(),
-  title: Joi.string(),
+  subject: Joi.string(),
   status: Joi.string()
 });
 
@@ -58,7 +58,7 @@ module.exports.Publish = async (req, res) => {
     const { id } = req.decoded; // Passed by verifyJwt, a middleware 
 
     // Retriving all reviews based on id
-    let reviews = await Review.Model.find({ userId: id }, { reviewId: 1, title: 1, status: 1, _id: 0 });
+    let reviews = await Review.Model.find({ userId: id }, { reviewId: 1, subject: 1, status: 1, isOwner: { $toBool: true }, _id: 0 });
 
     return res.status(200).json({
       success: true,
@@ -76,7 +76,7 @@ module.exports.Publish = async (req, res) => {
 };
 
 /**
- * Getting all reviews not posted by a user if the user is signed in
+ * Getting all reviews not posted by the user
  * @returns {json} retrun a JSON object
  */
  module.exports.Reviews = async (req, res) => {
@@ -84,7 +84,7 @@ module.exports.Publish = async (req, res) => {
     const id = req.headers.userid;
 
     // Retriving all reviews based on id
-    let reviews = await Review.Model.find({ userId: {$ne: id}}, { reviewId: 1, title: 1, status: 1, _id: 0 });
+    let reviews = await Review.Model.find({ userId: {$ne: id}}, { reviewId: 1, subject: 1, status: 1, isOwner: { $toBool: false }, _id: 0 });
 
     return res.status(200).json({
       success: true,
@@ -117,7 +117,7 @@ module.exports.Publish = async (req, res) => {
     }
 
     // Retriving all reviews based on id
-    let detail = await Review.Model.findOne({ reviewId: id }, { reviewId: 0, title: 0, status: 0, _id: 0 });
+    let detail = await Review.Model.findOne({ reviewId: id }, { reviewId: 0, subject: 0, status: 0, _id: 0 });
 
     if (!detail) {
       return res.json({

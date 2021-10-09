@@ -5,14 +5,15 @@ import axios from 'axios'
 import ReviewItem from '../components/ReviewItem'
 
 /**
- * List other reviews not posted by the user who is signed in
+ * List other reviews not posted by the user
  * @param {string} userId - User id
  */
 const OtherReviews = ( { userId }) => {
     /**
      * @typedef {Object} Review
      * @property {string} reviewId - Review id
-     * @property {title} title - Review title
+     * @property {subject} subject - Review subject
+     * @property {bool} isOwner - presenting if the user is the owner of the review or not
      * @property {string} status - Review status
      */ 
     const [reviews, setReviews] = useState()
@@ -23,7 +24,7 @@ const OtherReviews = ( { userId }) => {
         axios
         .get(process.env.REACT_APP_SERVER_BASE_URL + '/reviews/reviews', { headers: { UserId: userId } })
         .then((response) => {    
-            setReviews(response.data.reviews)      
+            setReviews(response.data.reviews)
             console.log(response.data.message)                      
         })
         .catch ((error) => {   

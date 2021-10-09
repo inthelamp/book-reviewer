@@ -12,7 +12,8 @@ import logo from '../assets/images/logo.png'
  * A header containing navigation bar
  */
 const Header = () => {
-    const title = process.env.REACT_APP_TITLE
+     // Redux selector for Review status
+    const UserStore = useSelector((state) => state.User)
 
     /**
      * @typedef {Object} User
@@ -21,8 +22,7 @@ const Header = () => {
      * @property {string} role - User role
      * @property {bool} isSignedIn - presenting if user is signed in or not
      */  
-    const storeUser = useSelector((state) => state.User)
-    const User = Object.keys(storeUser).length === 0 ? persistentUser() : storeUser
+    const User = Object.keys(UserStore).length === 0 ? persistentUser() : UserStore
 
     /**
      * Getting a user name
@@ -76,7 +76,9 @@ const Header = () => {
     if (User && User.isTokenExpired) {
         signOut()
     } 
-                                  
+                       
+    const title = process.env.REACT_APP_TITLE
+   
     return (
         <header>
             <Navbar bg='white' expand='lg'>      

@@ -1,12 +1,19 @@
+// import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { useSelector } from 'react-redux'
 import { Container, Row, Col } from 'react-bootstrap'
 import ReviewEditor from './ReviewEditor'
+import ReviewDetail from '../components/ReviewDetail'
 import Reviews from './Reviews'
+import { TextEditor } from '../features/ActionTypes'
 
 /**
  * Home page of the site
  */
 const Home = ( props ) => {
+    // Redux selector for TextEditor mode
+    const TextEditorStore = useSelector((state) => state.TextEditor)
+
     /**
      * @typedef {Object} User
      * @property {string} id - User id
@@ -21,7 +28,11 @@ const Home = ( props ) => {
         <Container>
             <Row>
                 <Col><Reviews userId={User.id} isSignedIn={ isSignedIn } /></Col>
-                <Col><ReviewEditor userId={User.id} isSignedIn={ isSignedIn }/></Col>
+                { Object.keys(TextEditorStore).length !== 0 && TextEditorStore.mode === TextEditor.CHANGED_MODE_TO_BROWSE ?
+                    (<Col><ReviewDetail userId={User.id} isSignedIn={ isSignedIn } review={TextEditorStore.review} /></Col>)
+                    :
+                    (<Col><ReviewEditor userId={User.id} isSignedIn={ isSignedIn }/></Col>)
+                }
             </Row>
         </Container>
     )
