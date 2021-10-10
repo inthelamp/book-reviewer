@@ -18,6 +18,7 @@ Book Reviewer follows <strong>MVC</strong> design pattern.
 >> - Sign-in with JWT token
 >> - Sign-out With JWT token
 >> - Saving data to MongoDB
+>> - Cookie
 >> - Retrieving data from MongoDB
 >> - ExpressJS Router
 >> - Mongoose
