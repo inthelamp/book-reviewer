@@ -8,7 +8,9 @@ NodeJS is an asynchronous event-driven JavaScript runtime and capable of develop
 
 In adapting to the MERN stack, learning React and other JavaScript libraries can be a challenge. React is a JavaScript library helping to build user interfaces and using [virtual DOM](https://reactjs.org/docs/faq-internals.html) to support traditionally <strong>client-side rendering</strong>. It might be a very different approach to developers who used to do <strong>server-side rendering</strong>. They might also feel it like spaghetti because of its state management, even if React pursuits component-based design. In addition to handling the state, they recognize soon that they can't develop front-end applications using React without other open-source JavaScript libraries such as [Redux](https://redux.js.org), [axios](https://github.com/axios/axios), [Slate](https://www.slatejs.org), [Lodash](https://lodash.com/), and [Eslint](https://eslint.org/) based on functions they want to implement. Learning Redux is probably more difficult than learning React itself.
 
-Book Reviewer follows <strong>MVC</strong> design pattern. 
+Book Reviewer follows <strong>MVC</strong> design pattern.
+
+![alt home page](image https://github.com/inthelamp/book-reviewer/blob/main/HomeAfterSign-in.png "Home page screenshot")
 
 >You can find the following examples in Book Reviewer.
 >> - Header with a navigation bar
