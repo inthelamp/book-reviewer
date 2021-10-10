@@ -10,7 +10,7 @@ In adapting to the MERN stack, learning React and other JavaScript libraries can
 
 Book Reviewer follows <strong>MVC</strong> design pattern.
 
-![alt home page](image https://github.com/inthelamp/book-reviewer/blob/main/HomeAfterSign-in.png "Home page screenshot")
+![alt text](https://github.com/inthelamp/book-reviewer/blob/main/HomeAfterSign-in.png?raw=true "Home page")
 
 >You can find the following examples in Book Reviewer.
 >> - Header with a navigation bar
