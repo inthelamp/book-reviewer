@@ -1,4 +1,4 @@
-#Book Reviewer
+# Book Reviewer
 [Book Reviewer](https://github.com/inthelamp/book-reviewer) is a learning project to obtain knowledge and skills about the [MERN stack](https://www.educative.io/edpresso/what-is-mern-stack) by testing and experiencing the JavaScript Stack in a Web development cycle. Book Reviewer won't only be a learning project but also a bridge to connect to other projects using cloud computing and Artificial Intelligence (AI). I will apply knowledge, skills, and technologies acquired through this project to my future projects.
 
 [Book Reviewer](https://github.com/inthelamp/book-reviewer) offers good <strong>examples</strong> for beginners who want to use the MERN stack for their software development. MERN stack is a web development framework using [MongoDB](https://www.mongodb.com), [ExpressJS](https://expressjs.com), [ReactJS](https://reactjs.org), and [NodeJS](https://nodejs.org) technologies. As a software developer who gets used to seeing program codes written in C#, Java, and C++ with SQL(Structured Query Language), and developing Web applications with .Net framework, MERN stack brought me quite a different experience.
