@@ -22,7 +22,6 @@ const ReviewEditor = ( { userId, isSignedIn } )  => {
     const [messageStyle, setMessageStyle] = useState('')
     const [isSaved, setIsSaved] = useState(false)
     const [content, setContent] = useState(localStorage.getItem('content') || JSON.stringify(InitialValue))
-    const token = getTokenNotExpried()    
     const history = useHistory()
 
     /**
@@ -70,6 +69,8 @@ const ReviewEditor = ( { userId, isSignedIn } )  => {
             // Checking if user is signed in
             if (userId && isSignedIn) {   
 
+                const token = getTokenNotExpried()
+                                
                 // Checking if token not expired exists 
                 if (token) {
                     const AuthString = 'token '.concat(token)
@@ -125,7 +126,7 @@ const ReviewEditor = ( { userId, isSignedIn } )  => {
             <RichText  setContent={setContent} reset={isSaved} />
             <div className='App-Buttons'>
                 <br />
-                <Button onClick={e => onSave(e)}>Save</Button>     
+                <Button onClick={onSave}>Save</Button>     
                 <Message message={message} messageStyle={messageStyle}/>                         
             </div>
         </>

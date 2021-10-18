@@ -1,3 +1,4 @@
+import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'

@@ -6,7 +6,7 @@ import Signin from './containers/Signin'
 import Signout  from './containers/Signout'
 import Signup from './containers/Signup'
 import Activate from './containers/Activate'
-import About from './containers/About'
+import About from './components/About'
 import './App.css'
 
 function App() {

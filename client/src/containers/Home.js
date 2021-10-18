@@ -1,4 +1,3 @@
-// import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { Container, Row, Col } from 'react-bootstrap'
