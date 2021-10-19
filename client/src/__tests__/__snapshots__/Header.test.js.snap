@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Header rendering correctly 1`] = `
+<header>
+  <nav
+    className="navbar navbar-expand-lg navbar-light bg-white"
+  >
+    <img
+      alt="Logo"
+      className="App-logo"
+      src={Object {}}
+    />
+    <a
+      className="navbar-brand"
+      href="/"
+      onClick={[Function]}
+    >
+      Book Reviewer
+    </a>
+    <div
+      aria-expanded={null}
+      className="navbar-collapse collapse"
+      id="basic-navbar-nav"
+    >
+      <div
+        className="me-auto navbar-nav"
+        onKeyDown={[Function]}
+      />
+      <div
+        className="pull-right user-tab navbar-nav"
+        onKeyDown={[Function]}
+      >
+        <a
+          className="nav-link"
+          data-rr-ui-event-key="/signin"
+          disabled={false}
+          href="/signin"
+          onClick={[Function]}
+        >
+          Sign In
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+`;

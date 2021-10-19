@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: About rendering correctly 1`] = `
+<div>
+  <h4>
+    Version 0.1.0
+  </h4>
+  <h4>
+    License: 
+    <a
+      href="https://opensource.org/licenses/MIT"
+      rel="noreferrer"
+      target="_blank"
+    >
+      MIT
+    </a>
+  </h4>
+  <h4>
+    Contributor: 
+    <a
+      href="https://github.com/inthelamp"
+      rel="noreferrer"
+      target="_blank"
+    >
+      IntheLamp
+    </a>
+  </h4>
+  <a
+    href="/"
+    onClick={[Function]}
+  >
+    Go Back
+  </a>
+</div>
+`;

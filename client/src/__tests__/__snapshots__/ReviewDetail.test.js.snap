@@ -1,0 +1,188 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: ReviewDetail Component: ReviewDetail rendering correctly 1`] = `
+Array [
+  <div
+    className="mb-1 float-sm-end btn-group"
+    role="group"
+  >
+    <button
+      className="btn btn-secondary"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      Edit this review
+    </button>
+    <button
+      className="btn btn-secondary"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      Post new review
+    </button>
+  </div>,
+  <form
+    className="mt-2"
+    onSubmit={[Function]}
+  >
+    <div
+      className="mb-3"
+      size="lg"
+    >
+      <label
+        className="form-label"
+        htmlFor="subject"
+      >
+        Subject
+      </label>
+      <input
+        className="form-control"
+        id="subject"
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      className="mb-3"
+      size="lg"
+    >
+      <div
+        className="container"
+        style={
+          Object {
+            "paddingLeft": 0,
+            "paddingRight": 0,
+          }
+        }
+      >
+        <div
+          className="row"
+        >
+          <div
+            className="col-10"
+          >
+            <label
+              className="form-label"
+              htmlFor="bookTitle"
+            >
+              Book Title
+            </label>
+            <input
+              className="form-control"
+              id="bookTitle"
+              onChange={[Function]}
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="col-2"
+          >
+            <label
+              className="form-label"
+              htmlFor="bookTitle"
+            >
+              Book ISBN-13
+            </label>
+            <input
+              className="form-control"
+              id="bookTitle"
+              onChange={[Function]}
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="mb-3"
+      size="lg"
+    >
+      <div
+        className="container"
+        style={
+          Object {
+            "paddingLeft": 0,
+            "paddingRight": 0,
+          }
+        }
+      >
+        <div
+          className="row"
+        >
+          <div
+            className="col"
+          >
+            <label
+              className="form-label"
+              htmlFor="authors"
+            >
+              First Author
+            </label>
+            <input
+              className="form-control"
+              id="authors"
+              name="firstAuthor"
+              onChange={[Function]}
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="col"
+          >
+            <label
+              className="form-label"
+              htmlFor="authors"
+            >
+              Second Author
+            </label>
+            <input
+              className="form-control"
+              id="authors"
+              name="secondAuthor"
+              onChange={[Function]}
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="col"
+          >
+            <label
+              className="form-label"
+              htmlFor="authors"
+            >
+              Third Author
+            </label>
+            <input
+              className="form-control"
+              id="authors"
+              name="thirdAuthor"
+              onChange={[Function]}
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="App-Buttons"
+    >
+      <button
+        className="btn btn-primary btn-lg"
+        disabled={false}
+        type="submit"
+      >
+        Update
+      </button>
+      
+    </div>
+  </form>,
+]
+`;

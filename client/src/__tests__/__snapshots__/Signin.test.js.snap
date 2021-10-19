@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Signin Component: Signin rendering correctly 1`] = `
+<div
+  className="signin"
+>
+  <form
+    className=""
+    onSubmit={[Function]}
+  >
+    <div
+      className="mb-3"
+      size="lg"
+    >
+      <label
+        className="form-label"
+        htmlFor="email"
+      >
+        Email
+      </label>
+      <input
+        autoFocus={true}
+        className="form-control"
+        id="email"
+        onChange={[Function]}
+        type="email"
+        value=""
+      />
+    </div>
+    <div
+      className="mb-3"
+      size="lg"
+    >
+      <label
+        className="form-label"
+        htmlFor="password"
+      >
+        Password
+      </label>
+      <input
+        className="form-control"
+        id="password"
+        onChange={[Function]}
+        type="password"
+        value=""
+      />
+    </div>
+    <button
+      className="btn btn-primary btn-lg"
+      disabled={true}
+      type="submit"
+    >
+      Sign In
+    </button>
+    
+    <p>
+      New Book Reviewer? 
+      <a
+        aria-current={null}
+        href="/signup"
+        onClick={[Function]}
+      >
+        Create an account
+      </a>
+    </p>
+  </form>
+</div>
+`;

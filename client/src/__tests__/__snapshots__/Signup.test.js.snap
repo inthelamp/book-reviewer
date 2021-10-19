@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Signup Component: Signup rendering correctly 1`] = `
+<div
+  className="signup"
+>
+  <form
+    className=""
+    onSubmit={[Function]}
+  >
+    <div
+      class="mb-3"
+      size="lg"
+    >
+      <label
+        className="form-label"
+        htmlFor="email"
+      >
+        Email
+      </label>
+      <input
+        autoFocus={true}
+        className="form-control"
+        id="email"
+        onChange={[Function]}
+        type="email"
+        value=""
+      />
+    </div>
+    <div
+      className="mb-3"
+      size="lg"
+    >
+      <label
+        className="form-label"
+        htmlFor="userName"
+      >
+        User Name
+      </label>
+      <input
+        className="form-control"
+        id="userName"
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      className="mb-3"
+      size="lg"
+    >
+      <label
+        className="form-label"
+        htmlFor="password"
+      >
+        Password
+      </label>
+      <input
+        className="mb-3 form-control"
+        id="password"
+        onChange={[Function]}
+        type="password"
+        value=""
+      />
+      <label
+        className="form-label"
+        htmlFor="password"
+      >
+        Password Confirm
+      </label>
+      <input
+        className="form-control"
+        id="password"
+        onChange={[Function]}
+        type="password"
+        value=""
+      />
+    </div>
+    <button
+      className="btn btn-primary btn-lg"
+      disabled={true}
+      type="submit"
+    >
+      Sign Up
+    </button>
+    
+  </form>
+</div>
+`;

@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Footer rendering correctly 1`] = `
+<footer>
+  <p>
+    <img
+      alt="Logo"
+      className="App-logo"
+      src={Object {}}
+    />
+      Copyright © 2021, IntheLamp  
+    <a
+      href="/about"
+      onClick={[Function]}
+    >
+      About
+    </a>
+  </p>
+</footer>
+`;

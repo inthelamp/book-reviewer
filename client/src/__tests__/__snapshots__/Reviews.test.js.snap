@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Reviews Component: Reviews rendering correctly 1`] = `
+<div
+  className="review"
+>
+  <div>
+    <h4>
+      My Reviews
+    </h4>
+  </div>
+  <h4>
+    Reviews
+  </h4>
+</div>
+`;

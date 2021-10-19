@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: ReviewItem Component: ReviewItem rendering correctly 1`] = `
+<div>
+  test subject
+    
+  <button
+    className="float-end btn btn-secondary btn-sm"
+    disabled={false}
+    onClick={[Function]}
+    type="button"
+  >
+    Read
+  </button>
+</div>
+`;
