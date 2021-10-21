@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: Signin Component: Signin rendering correctly 1`] = `
+exports[`Component: Signin rendering correctly 1`] = `
 <div
   className="signin"
 >
@@ -22,6 +22,7 @@ exports[`Component: Signin Component: Signin rendering correctly 1`] = `
         autoFocus={true}
         className="form-control"
         id="email"
+        name="email"
         onChange={[Function]}
         type="email"
         value=""
@@ -40,6 +41,7 @@ exports[`Component: Signin Component: Signin rendering correctly 1`] = `
       <input
         className="form-control"
         id="password"
+        name="password"
         onChange={[Function]}
         type="password"
         value=""

@@ -45,7 +45,7 @@ describe('Component: Home', () => {
             </Provider>
         )
       
-        getByText('My Reviews')
+        getByText('Reviews')
     })
   })
   

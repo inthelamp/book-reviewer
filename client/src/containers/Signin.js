@@ -111,7 +111,14 @@ const Signin = () => {
           }
       })
     }
-    
+
+    const handleChange = (e) => {
+        if (e.target.name === 'email') {
+            setEmail(e.target.value)
+        } else if (e.target.name === 'password') {
+            setPassword(e.target.value)
+        }
+    }
     
     // Processing sign-in
     const onSubmit = (e) => {
@@ -134,25 +141,29 @@ const Signin = () => {
         }}
         />
     }
+    
+    const Input = (props) => <Form.Control {...props} />    
 
     return (
       <div className='signin'>
         <Form onSubmit={onSubmit}>
           <Form.Group className='mb-3' size='lg' controlId='email'>
             <Form.Label>Email</Form.Label>
-            <Form.Control
+            <Input
               autoFocus
+              name='email'              
               type='email'
               value={email}
-              onChange={(e) => setEmail(e.currentTarget.value)}
+              onChange={handleChange}
           />
           </Form.Group>
           <Form.Group className='mb-3' size='lg' controlId='password'>
             <Form.Label>Password</Form.Label>
-            <Form.Control
+            <Input
               type='password'
+              name='password'
               value={password}
-              onChange={(e) => setPassword(e.currentTarget.value)}
+              onChange={handleChange}
             />
           </Form.Group>
           <Button size='lg' type='submit' disabled={!isValid()} > 
