@@ -15,6 +15,7 @@ it("Component: Message rendering correctly", () => {
       <br />,
       <label
         className="success_message form-label"
+        data-testid="message"
       >
         Pass successfully
       </label>,

@@ -13,7 +13,7 @@ const Message = ({ message, messageStyle }) => {
                     <>
                         <br />
                         <br />
-                        <Form.Label className={messageStyle}>{message}</Form.Label> 
+                        <Form.Label data-testid='message' className={messageStyle}>{message}</Form.Label> 
                     </>           
     )
 }
