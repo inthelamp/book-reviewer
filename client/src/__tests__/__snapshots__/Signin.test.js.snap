@@ -40,6 +40,7 @@ exports[`Component: Signin rendering correctly 1`] = `
       </label>
       <input
         className="form-control"
+        data-testid="password"
         id="password"
         name="password"
         onChange={[Function]}

@@ -99,13 +99,15 @@ const Signin = () => {
             console.log('Sign-in', response.data.message + ' (' + user.id + ')') 
           } else {
             setMessageStyle('error_message')      
-            setMessage('Unable to sign in, please try later!')              
+            setMessage('Unable to sign in, please try later!')  
+            setIsSignedIn(false)      
           }
       })
-      .catch ((error) => {
-          setMessageStyle('error_message')      
-          if (error.response) {
-            setMessage(error.response.data.message)                
+      .catch ((error) => { 
+          if (error.response) {           
+            setMessageStyle('error_message')         
+            setMessage(error.response.data.message)    
+            setIsSignedIn(false)  //fixing the errors: Cannot log after tests are done, Attempted to log "Warning: Can't perform a React state update on an unmounted component."            
           } else {
             console.log('Error', error.message)
           }
@@ -121,7 +123,7 @@ const Signin = () => {
     }
     
     // Processing sign-in
-    const onSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault()
         Store.dispatch(sendSignIn())
     }
@@ -135,18 +137,18 @@ const Signin = () => {
 
     // Go to home page afrer sign-in
     if (isSignedIn) {
-        return <Redirect  to={{
+        return <Redirect to={{
               pathname: '/',
               state: { User }
         }}
         />
     }
-    
+
     const Input = (props) => <Form.Control {...props} />    
 
     return (
       <div className='signin'>
-        <Form onSubmit={onSubmit}>
+        <Form onSubmit={handleSubmit}>
           <Form.Group className='mb-3' size='lg' controlId='email'>
             <Form.Label>Email</Form.Label>
             <Input
@@ -162,6 +164,7 @@ const Signin = () => {
             <Input
               type='password'
               name='password'
+              data-testid='password'
               value={password}
               onChange={handleChange}
             />
