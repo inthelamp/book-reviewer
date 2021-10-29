@@ -121,7 +121,7 @@ const Signin = () => {
             setPassword(e.target.value)
         }
     }
-    
+
     // Processing sign-in
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -144,14 +144,18 @@ const Signin = () => {
         />
     }
 
-    const Input = (props) => <Form.Control {...props} />    
+    // Only for testing
+    // const Input = (props) => <Form.Control {...props} />    
 
     return (
       <div className='signin'>
         <Form onSubmit={handleSubmit}>
           <Form.Group className='mb-3' size='lg' controlId='email'>
             <Form.Label>Email</Form.Label>
-            <Input
+            {/* Only for testing
+               <Input 
+            */}    
+          <Form.Control 
               autoFocus
               name='email'              
               type='email'
@@ -161,7 +165,10 @@ const Signin = () => {
           </Form.Group>
           <Form.Group className='mb-3' size='lg' controlId='password'>
             <Form.Label>Password</Form.Label>
-            <Input
+            {/* Only for testing
+                <Input 
+            */}   
+            <Form.Control
               type='password'
               name='password'
               data-testid='password'
