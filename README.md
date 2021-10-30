@@ -36,3 +36,4 @@ Book Reviewer follows MVC design pattern.
 >> - prop-types
 >> - Eslint
 >> - Unit, integration, and snapshot testing with Jest and Enzyme
+>> - <strong>Dockerizing</strong> MERN stack app with Nginx
