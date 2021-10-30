@@ -1,0 +1,39 @@
+version: '3.7'
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    image: book-reviewer-server
+    container_name: book-reviewer-server
+    env_file: 
+      ./server/.env
+    ports:
+      - 5000:5000
+    networks:
+      - frontend
+      - backend
+
+  client:
+    build:
+      context: ./client
+      args:
+        - REACT_APP_SERVER_BASE_URL=http://127.0.0.1:5000
+      dockerfile: Dockerfile
+    image: book-reviewer-client
+    container_name: book-reviewer-client
+    depends_on:
+      - server
+    env_file:
+      - ./client/.env      
+    ports:
+      - 8080:80
+    environment:
+      - NODE_ENV=production      
+    networks:
+      - frontend
+
+networks:
+  frontend:
+  backend:
