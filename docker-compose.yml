@@ -20,13 +20,14 @@ services:
       context: ./client
       args:
         - REACT_APP_SERVER_BASE_URL=http://127.0.0.1:5000
+        - REACT_APP_TITLE=Book Reviewer
+        - REACT_APP_COOKIE_SUSTAINING_HOURS=1
+        - REACT_APP_SUBJECT_MAX_SIZE=50
       dockerfile: Dockerfile
     image: book-reviewer-client
     container_name: book-reviewer-client
     depends_on:
       - server
-    env_file:
-      - ./client/.env      
     ports:
       - 8080:80
     environment:
