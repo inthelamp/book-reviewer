@@ -20,6 +20,11 @@ export const SignedOut = () => ({
     type: User.SIGNED_OUT
 })
 
+// ChangedModeToInit action
+export const ChangedModeToInit = () => ({
+    type: TextEditor.CHANGED_MODE_TO_INIT
+})
+
 // ChangedModeToBrowse action
 export const ChangedModeToBrowse = (review) => ({
     type: TextEditor.CHANGED_MODE_TO_BROWSE,

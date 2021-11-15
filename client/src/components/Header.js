@@ -13,7 +13,7 @@ import logo from '../assets/images/logo.png'
  * A header containing navigation bar
  */
 const Header = () => {
-     // Redux selector for Review status
+     // Redux selector for User
     const UserStore = useSelector((state) => state.User)
 
     /**

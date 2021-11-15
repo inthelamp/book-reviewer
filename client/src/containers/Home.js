@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { Container, Row, Col } from 'react-bootstrap'
+import { persistentUser } from '../features/PersistentUser'
 import ReviewEditor from './ReviewEditor'
 import ReviewDetail from '../components/ReviewDetail'
 import Reviews from './Reviews'
@@ -9,10 +9,13 @@ import { TextEditor } from '../features/ActionTypes'
 /**
  * Home page of the site
  */
-const Home = ( props ) => {
-    // Redux selector for TextEditor mode
+const Home = () => {
+    // Redux selector for TextEditor
     const TextEditorStore = useSelector((state) => state.TextEditor)
 
+     // Redux selector for User
+    const UserStore = useSelector((state) => state.User)
+    
     /**
      * @typedef {Object} User
      * @property {string} id - User id
@@ -20,7 +23,7 @@ const Home = ( props ) => {
      * @property {string} role - User role
      * @property {bool} isSignedIn - presenting if user is signed in or not
      */  
-    const User =  (props.location && props.location.state && props.location.state.User) || ''
+    const User = Object.keys(UserStore).length === 0 ? persistentUser() : UserStore
     const isSignedIn = User ? User.isSignedIn : false
 
     return (
@@ -35,19 +38,6 @@ const Home = ( props ) => {
             </Row>
         </Container>
     )
-}
-
-Home.propTypes = {
-    location: PropTypes.shape({
-        state: PropTypes.shape({
-            User: PropTypes.shape({
-                id: PropTypes.string,
-                name: PropTypes.string,
-                role: PropTypes.string,
-                isSignedIn: PropTypes.bool.isRequired,
-            })
-        })
-    })
 }
 
 export default Home

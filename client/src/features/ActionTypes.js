@@ -8,6 +8,7 @@ export const User = {
 }
 
 export const TextEditor = {
+	CHANGED_MODE_TO_INIT: 'changedModeToInit',		
 	CHANGED_MODE_TO_BROWSE: 'changedModeToBrowse',
 	CHANGED_MODE_TO_EDIT: 'changedModeToEdit'
 }

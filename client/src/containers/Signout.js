@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
-import { SignedOut } from '../features/Actions'
+import { SignedOut, ChangedModeToInit } from '../features/Actions'
 import { getTokenNotExpried } from '../features/PersistentUser'
 import Store from '../features/Store'
 
@@ -42,7 +42,8 @@ const Signout = ( props ) => {
             .get(process.env.REACT_APP_SERVER_BASE_URL + '/users/signout', { headers: { Authorization: AuthString, UserId: User.id } })
             .then((response) => {          
                 clearCookies()         
-                dispatch(SignedOut())         //Changing status of user to sign-out       
+                dispatch(SignedOut())         // Changing status of user to sign-out       
+                dispatch(ChangedModeToInit()) // Changing mode of TextEditor to the initial mode                      
                 setIsSignedOut(!getState().User.isSignedIn)                       
                 console.log('Sign-out', response.data.message + ' (' + User.id + ')')                                      
             })
@@ -58,6 +59,7 @@ const Signout = ( props ) => {
             console.log('Sign-out token is expired. (' + User.id + ')')              
             clearCookies()         
             dispatch(SignedOut())            // Changing status of user to sign-out  
+            dispatch(ChangedModeToInit())    // Changing mode of TextEditor to the initial mode                
             setIsSignedOut(!getState().User.isSignedIn)               
         } 
     }

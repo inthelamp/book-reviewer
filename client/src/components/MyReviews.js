@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { ListGroup } from 'react-bootstrap'
 import axios from 'axios'
+import { useSelector } from 'react-redux'
 import { Review } from '../features/ActionTypes'
 import { ListedReview } from '../features/Actions'
 import { getTokenNotExpried } from '../features/PersistentUser'
@@ -14,6 +15,10 @@ import Store from '../features/Store'
  * @param {bool} isSignedIn - presenting if user is signed in or not
  */
 const MyReviews = ({ userId, isSignedIn }) => {
+
+    // Redux selector for Review
+    const ReviewStore = useSelector((state) => state.Review)
+
     /**
      * @typedef {Object} Review
      * @property {string} reviewId - Review id
@@ -23,6 +28,24 @@ const MyReviews = ({ userId, isSignedIn }) => {
      */ 
     const [reviews, setReviews] = useState()
     const [isListed, setIsListed] = useState(false)
+
+    /**
+     * Resetting isListed according to review status
+     */
+    if (isListed && Object.keys(ReviewStore).length !== 0 &&  ReviewStore.status === Review.POSTED_REVIEW)
+    {
+        setIsListed(false)
+    }
+
+    // Getting my reviews  
+    useEffect(() => {  
+        // Getting token not expired
+        const token = getTokenNotExpried()
+
+        if (userId && isSignedIn && token && !isListed) {
+            Store.dispatch(getMyReviews(token))
+        }
+    }, [isListed])        
 
     /**
      * Dispatching ListedReview action
@@ -61,16 +84,6 @@ const MyReviews = ({ userId, isSignedIn }) => {
             }
         })   
     }
-
-    // Getting my reviews  
-    useEffect(() => {  
-        // Getting token not expired
-        const token = getTokenNotExpried()
-
-        if (userId && isSignedIn && token && !isListed) {      
-            Store.dispatch(getMyReviews(token))
-        } 
-    }, [isListed]); 
 
     return (<>
                 {reviews ? ( <ListGroup className='scrollable'>
