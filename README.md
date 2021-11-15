@@ -11,7 +11,7 @@ In adapting to the MERN stack, learning React and other JavaScript libraries can
 
 Book Reviewer follows MVC design pattern.
 
-![alt text](https://github.com/inthelamp/book-reviewer/blob/main/HomeAfterSign-in.png?raw=true "Home page")
+![alt text](https://github.com/inthelamp/book-reviewer/blob/main/ReadReview.gif?raw=true "Home page")
 
 >You can find the following <strong>examples</strong> in Book Reviewer.
 >> - Header with a navigation bar
@@ -37,3 +37,5 @@ Book Reviewer follows MVC design pattern.
 >> - Eslint
 >> - Unit, integration, and snapshot testing with Jest and Enzyme
 >> - <strong>Dockerizing</strong> MERN stack app with Nginx
+
+[Book Reviewer with ASP.NET Core MVC](https://github.com/inthelamp/book-reviewer-aspnetcore) is available.
