@@ -38,4 +38,4 @@ Book Reviewer follows MVC design pattern.
 >> - Unit, integration, and snapshot testing with Jest and Enzyme
 >> - <strong>Dockerizing</strong> MERN stack app with Nginx
 
-[Book Reviewer with ASP.NET Core MVC](https://github.com/inthelamp/book-reviewer-aspnetcore) is available.
+[Book Reviewer for ASP.NET Core MVC](https://github.com/inthelamp/book-reviewer-aspnetcore) is available.
